@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zsc.servicedata.mapper.AirMapper">
+
+    <resultMap id="AqiHistoryMap" type="model.air.HistoryAqiChart">
+        <id column="id" property="id" javaType="Long"/>
+        <result column="rank" property="rank" javaType="Integer"/>
+        <result column="markTime" property="markTime" javaType="Date"/>
+        <result column="area" property="city" javaType="String"/>
+        <result column="aqi" property="aqi" javaType="String"/>
+        <result column="quality" property="quality" javaType="String"/>
+    </resultMap>
+
+    <!--将 < 号换成  &lt;
+         > 号 换成&gt; -->
+    <!--在if的test中，直接使用参数名，不用加#{}-->
+    <select id="selectAqiHistoryByParam" resultMap="AqiHistoryMap" parameterType="com.zsc.servicedata.entity.param.AqiHistoryParam">
+        SELECT * FROM aqihistory a
+        <where>
+            <!--<if test="#{startTime} != null and #{endTime} != null ">-->
+                <!--AND a.markTime BETWEEN #{startTime} AND #{endTime}-->
+            <!--</if>-->
+            <if test="startTime != null">
+                AND a.markTime <![CDATA[>=]]> #{startTime}
+            </if>
+            <if test="endTime != null">
+                AND a.markTime <![CDATA[<=]]>#{endTime}
+            </if>
+            <if test="size !=null">
+                AND #{size} &gt;
+                (
+                SELECT COUNT(*) FROM aqihistory WHERE
+                markTime=a.markTime AND `rank` &lt; a.`rank`
+                )
+                <if test="order=='ASC'.toString()">
+                    ORDER BY
+                    a.markTime,a.`rank` ASC
+                </if>
+                <if test="order=='DESC'.toString()">
+                    ORDER BY
+                    a.markTime,a.`rank` DESC
+                </if>
+            </if>
+        </where>
+    </select>
+
+
+
+
+
+
+
+</mapper>

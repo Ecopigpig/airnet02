@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zsc.servicedata.mapper.CityMapper">
+
+    <resultMap id="CityCodeMap" type="model.weather.AreaCode">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="area" property="area" jdbcType="VARCHAR"/>
+        <result column="areaCode" property="areaCode" jdbcType="VARCHAR"/>
+        <result column="postalCode" property="postalCode" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insertAreaCode">
+        insert into areacode (city,area,areaCode,postalCode) values
+        <foreach collection="list" item="item" index="index" separator="," close=";">
+            (#{item.city},#{item.area},#{item.areaCode},#{item.postalCode})
+        </foreach>
+    </insert>
+
+    <insert id="saveSiteOfCity">
+        insert into citysite (area,siteName,longitude,latitude) values
+        <foreach collection="list" item="item" index="index" separator="," close=";">
+            (#{item.area},#{item.siteName},#{item.longitude},#{item.latitude})
+        </foreach>
+    </insert>
+
+    <select id="selectCodeByAreaName" resultMap="CityCodeMap">
+--         select * from areacode where city like '%${city}%' and area like '%${area}%'
+        select * from areacode where city like "%"#{city}"%" and area like "%"#{area}"%"
+    </select>
+
+    <resultMap id="MonitorSiteMap" type="model.pollutant.MonitorSite">
+        <result property="area" column="area"/>
+        <result property="siteName" column="sitename"/>
+        <result property="longitude" column="longitude"/>
+        <result property="latitude" column="latitude"/>
+    </resultMap>
+
+    <select id="selectMonitorSiteByCity" resultMap="MonitorSiteMap">
+        SELECT * FROM citysite WHERE area like "%"#{city}"%"
+    </select>
+</mapper>

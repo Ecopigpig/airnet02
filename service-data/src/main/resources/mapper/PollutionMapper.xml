@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zsc.servicedata.mapper.PollutionMapper">
+
+    <select id="selectMonitorListByUser" parameterType="Long" resultType="com.zsc.servicedata.entity.data.Pollutant">
+        select * from pollutantmonitor where userId = #{userId}
+    </select>
+
+    <insert id="insertMonitorPoint" parameterType="com.zsc.servicedata.entity.param.PollutionMonitorParam">
+        insert into pollutantmonitor (so2,o3,pm25,co,no2,aqi,quality,pm10,o3per8h,area,userId)
+        values
+        <foreach collection="list" item="item" index="index" separator="," close=";">
+            (#{item.so2},#{item.o3},#{item.pm25},#{item.co},#{item.no2},#{item.aqi},
+            #{item.quality},#{item.pm10},#{item.o3per8h},#{item.area},#{item.userId})
+        </foreach>
+    </insert>
+
+    <insert id="insertPollutantHistory" parameterType="model.pollutant.PollutionEpisode">
+        insert into pollutanthistory (`rank`,so2,pm25,publishTime,primaryPollutant,
+        co,area,no2,aqi,quality,pm10,o3per8h) values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.rank},#{item.so2},#{item.pm25},#{item.ct},#{item.primaryPollutant},#{item.co},#{item.area},#{item.no2},#{item.aqi},
+            #{item.quality},#{item.pm10},#{item.o3Per8h})
+        </foreach>
+    </insert>
+
+    <select id="selectAllMonitor" resultType="com.zsc.servicedata.entity.data.Pollutant">
+        select * from pollutantmonitor
+    </select>
+
+    <resultMap id="pollutionEpisodeMap" type="model.pollutant.PollutionEpisode">
+        <id column="id" property="id" javaType="Long"/>
+        <result column="so2" property="so2" javaType="String"/>
+        <result column="pm25" property="pm25" javaType="String"/>
+        <result column="publishTime" property="ct" javaType="String"/>
+        <result column="co" property="co" javaType="String"/>
+        <result column="area" property="area" javaType="String"/>
+        <result column="no2" property="no2" javaType="String"/>
+        <result column="aqi" property="aqi" javaType="String"/>
+        <result column="quality" property="quality" javaType="String"/>
+        <result column="pm10" property="pm10" javaType="String"/>
+        <result column="o3per8h" property="o3Per8h" javaType="String"/>
+        <result column="rank" property="rank" javaType="Integer"/>
+    </resultMap>
+
+    <select id="selectAllHistory" resultMap="pollutionEpisodeMap">
+        select * from pollutanthistory
+    </select>
+
+    <parameterMap id="historyAqiMap" type="model.air.HistoryAqiChart">
+        <parameter property="id" javaType="Long"/>
+        <parameter property="city" javaType="String"/>
+        <parameter property="aqi" javaType="String"/>
+        <parameter property="quality" javaType="String"/>
+        <parameter property="rank" javaType="Integer"/>
+        <parameter property="markTime" javaType="Date"/>
+    </parameterMap>
+
+    <insert id="insertAqiHistory" parameterMap="historyAqiMap">
+        insert into aqihistory (`rank`,markTime,area,aqi,quality) values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.rank},#{item.markTime},
+            #{item.city},#{item.aqi},#{item.quality})
+        </foreach>
+    </insert>
+</mapper>

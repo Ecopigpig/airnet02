@@ -1,0 +1,111 @@
+server:
+  port: 8708
+
+spring:
+#  cloud:
+#    config:
+#      enabled: true
+#      discovery:
+#        enabled: true
+  application:
+    name: servicedata #服务之间的调用就是通过这个名字
+  zipkin:
+    base-url: http://localhost/9411
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1.0
+    trace-id128: true
+  redis:
+    database: 0  # Redis数据库索引（默认为0）
+    host: localhost # Redis服务器地址
+    port: 6379   # Redis服务器连接端口
+    password:           # Redis服务器连接密码（默认为空）
+    jedis:
+      pool:
+        max-active: 8 #连接池最大连接数（使用负值表示没有限制）
+        max-wait: -1  # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 8  # 连接池中的最大空闲连接
+        min-idle: 0  # 连接池中的最小空闲连接
+    timeout: 300  # 连接超时时间（毫秒）
+  cache:
+    redis:
+       timeToLive: 1000000 #毫秒
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/airnet?setUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: "@mnc2017317725"
+#    password: "abc@123456"
+  mail:
+    #    host不配置会注入失败
+    host: smtp.163.com
+    username: ecochoupipig@163.com
+    password: mnc2017317725 #这是邮箱授权码，不是密码
+    default-encoding: utf-8
+    protocol: smtp
+    properties:
+        mail:
+          smtp:
+            connectiontimeout: 5000
+            timeout: 3000
+            writetimeout: 5000
+
+
+###jwt配置
+#audience:
+#  # 代表这个JWT的接收对象,存入audience
+#  clientId: 098f6bcd4621d373cade4e832627b4f6
+#  # 密钥, 经过Base64加密, 可自行替换
+#  base64Secret: MDk4ZjZiY2Q0NjIxZDM3M2NhZGU0ZTgzMjYyN2I0ZjY=
+#  # JWT的签发主体，存入issuer
+#  name: restapiuser
+#  # 过期时间，时间戳
+#  expiresSecond: 172800
+
+eureka:
+  client:
+#    fetch-registry: true #发现服务
+    register-with-eureka: false #注册服务
+    service-url:    #这个service-url是对的
+      default-Zone: http://localhost:8761/euraka/  #这个default-Zone是对的
+  instance:
+    prefer-ip-address: true
+    ip-address: 39.108.10.105
+    instance-id: ${spring.application.name}:${server.port} #注册的实例名称
+    hostname: service-data #当前实例所在主机名
+
+ribbon:
+  ConnectTimeout: 10000 # ribbon链接超时时长
+  ReadTimeout: 10000 # ribbon读取超时时间长
+  eureka:
+    enabled: true
+
+
+
+management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+

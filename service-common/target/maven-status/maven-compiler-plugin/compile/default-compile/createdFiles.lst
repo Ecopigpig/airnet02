@@ -1,0 +1,13 @@
+model\pollutant\PollutantCity.class
+model\air\AirQuality.class
+model\weather\WeatherIn15Days.class
+model\weather\WeatherTip.class
+model\pollutant\PollutionEpisode.class
+model\weather\AreaCode.class
+model\result\ResponseResult.class
+model\weather\Weather24Hours.class
+model\pollutant\PollutionSite.class
+model\weather\InstanceWeather.class
+model\air\HistoryAqiChart.class
+model\pollutant\MonitorSite.class
+model\weather\WeatherAlarm.class

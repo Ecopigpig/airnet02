@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zsc.servicedata.mapper.UserMapper">
+
+    <resultMap id="userInfoMap" type="com.zsc.servicedata.entity.data.UserInfo">
+        <id column="id" property="id" javaType="java.lang.Long"/>
+        <result column="username" property="username" javaType="java.lang.String"/>
+        <result column="password" property="password" javaType="java.lang.String"/>
+        <result column="email" property="email" javaType="java.lang.String"/>
+        <result column="role" property="role" javaType="java.lang.Integer"/>
+        <result column="auth" property="auth" javaType="java.lang.Integer"/>
+    </resultMap>
+
+    <update id="updateToken">
+        update userInfo set token = #{token} where id = #{userId}
+    </update>
+
+    <select id="selectAllUserEmail" resultMap="userInfoMap" parameterType="Long">
+        select * from userInfo where id in
+        <foreach collection="list" item="id" index="index"
+                 open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="selectUserById" resultType="com.zsc.servicedata.entity.data.UserInfo">
+        select * from userInfo where id = #{id}
+    </select>
+
+    <select id="confirmUser" resultType="com.zsc.servicedata.entity.data.UserInfo" parameterType="com.zsc.servicedata.entity.data.UserInfo">
+        select * from userInfo
+        <where>
+            <if test="id != null and id !='' ">
+               and id = #{id}
+            </if>
+            <if test="password != null and password !='' ">
+               and password=#{password}
+            </if>
+            <if test="email!=null and email!=''">
+              and email=#{email}
+            </if>
+            <if test="username != null and username !='' ">
+                and username=#{username}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="selectAllUsers" resultType="com.zsc.servicedata.entity.data.UserInfo">
+        select * from userInfo
+    </select>
+</mapper>
