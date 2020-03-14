@@ -13,7 +13,6 @@ import org.springframework.data.redis.serializer.SerializationException;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.nio.charset.Charset;
-import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RedisConfig {
@@ -21,7 +20,13 @@ public class RedisConfig {
     RedisConfig(){
         //打开autotype功能,需要强转的类一次添加其后
         ParserConfig.getGlobalInstance()
-                .addAccept("model.pollutant.,model.air.,model.result.,model.weather.");
+                .addAccept("model.pollutant.");
+        ParserConfig.getGlobalInstance()
+                .addAccept("model.air.");
+        ParserConfig.getGlobalInstance()
+                .addAccept(",model.result.");
+        ParserConfig.getGlobalInstance()
+                .addAccept("model.weather.");
     }
 
     @Bean
