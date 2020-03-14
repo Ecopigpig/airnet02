@@ -37,8 +37,8 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/airnet?setUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
-    password: "@mnc2017317725"
-#    password: "abc@123456"
+#    password: "@mnc2017317725"
+    password: "abc@123456"
   mail:
     #    host不配置会注入失败
     host: smtp.163.com

@@ -4,9 +4,13 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
 @ApiModel(value = "未来15天天气情况实体")
-public class WeatherIn15Days {
+public class WeatherIn15Days implements Serializable {
+
+    private static final long serialVersionUID = 2682543256658582907L;
 
     @ApiModelProperty(value = "地区名称")
     private String area;

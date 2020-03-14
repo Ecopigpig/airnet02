@@ -4,6 +4,7 @@ import com.zsc.servicedata.entity.param.AqiHistoryParam;
 import com.zsc.servicedata.service.AirService;
 import com.zsc.servicedata.service.CityService;
 import com.zsc.servicedata.service.PollutionService;
+import com.zsc.servicedata.service.feign.HiFeignService;
 import com.zsc.servicedata.tag.PassToken;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -37,6 +38,9 @@ public class CityController {
     @Autowired
     private PollutionService pollutionService;
 
+    @Autowired
+    private HiFeignService hiFeignService;
+
     @PassToken
     @ApiOperation(value = "通过城市名称获取其对应的实时天气areaCode")
     @RequestMapping(value = "/getAreaCode", method = RequestMethod.GET)
@@ -49,7 +53,7 @@ public class CityController {
         AreaCode areaCode = cityService.selectCodeByAreaName(city,area);
         //没有,去调API查一次再存到数据库里头
         if(areaCode==null) {
-            List<AreaCode> areaCodeList = restTemplate.getForObject("http://service-hi:8763/weather/getAreaCode?city=" + city, List.class);
+            List<AreaCode> areaCodeList = hiFeignService.getAreaCode(city);
             int i = cityService.insertAreaCode(areaCodeList);
             if(i>0) {
                 areaCode = cityService.selectCodeByAreaName(city,area);
@@ -80,14 +84,14 @@ public class CityController {
         AreaCode areaCode = cityService.selectCodeByAreaName(city,area);
         //没有,去调API查一次再存到数据库里头
         if(areaCode==null) {
-            List<AreaCode> areaCodeList = restTemplate.getForObject("http://service-hi:8763/weather/getAreaCode?city=" + city, List.class);
+            List<AreaCode> areaCodeList = hiFeignService.getAreaCode(city);
             int i = cityService.insertAreaCode(areaCodeList);
             if(i>0) {
                 areaCode = cityService.selectCodeByAreaName(city,area);
             }
         }
         //在去用代码查询实时天气
-        InstanceWeather instanceWeather = restTemplate.getForObject("http://service-hi:8763/weather/getInstanceWeather?areaCode="+areaCode.getAreaCode()+"&postalCode="+areaCode.getPostalCode(), InstanceWeather.class);
+        InstanceWeather instanceWeather = hiFeignService.getInstanceWeather(areaCode.getAreaCode(),areaCode.getPostalCode());
         if(instanceWeather!=null){
             instanceWeather.setCity(city+area);
             result.setMsg(true);

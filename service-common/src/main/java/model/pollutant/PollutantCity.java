@@ -4,12 +4,15 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 
 @Data
 @ApiModel(value = "城市污染情况")
-public class PollutantCity {
+public class PollutantCity implements Serializable {
+
+    private static final long serialVersionUID = -4000833675419779099L;
 
     @ApiModelProperty(value = "城市污染排名")
     private String num;

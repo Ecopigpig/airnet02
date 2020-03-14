@@ -4,10 +4,14 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 
 @Data
 @ApiModel(value = "基本污染指数模型")
-public class PollutionEpisode {
+public class PollutionEpisode implements Serializable {
+
+    private static final long serialVersionUID = 3568953689767706469L;
 
     private Long id;
 

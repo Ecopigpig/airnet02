@@ -5,9 +5,13 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import model.pollutant.PollutionEpisode;
 
+import java.io.Serializable;
+
 @Data
 @ApiModel(value = "城市空气质量")
-public class AirQuality{
+public class AirQuality implements Serializable {
+
+    private static final long serialVersionUID = 1840221730181099950L;
 
     @ApiModelProperty(value = "基本污染指数模型")
     private PollutionEpisode pollutionEpisode;

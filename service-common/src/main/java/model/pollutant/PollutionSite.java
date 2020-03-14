@@ -1,9 +1,14 @@
 package model.pollutant;
 
+import java.io.Serializable;
+
 /**
  * 城市底下的污染检测点
  */
-public class PollutionSite {
+public class PollutionSite implements Serializable {
+
+    private static final long serialVersionUID = -5667194913415998127L;
+
     /**
      * 污染检测点
      */
