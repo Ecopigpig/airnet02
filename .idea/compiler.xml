@@ -9,7 +9,6 @@
         <module name="eureka-server" />
         <module name="service-common" />
         <module name="service-data" />
-        <module name="service-feign" />
         <module name="service-hi" />
       </profile>
     </annotationProcessing>

@@ -2,13 +2,14 @@ server:
   port: 8763
 
 spring:
-#  cloud:
-#    config:
-#      enabled: true
-#      discovery:
-#        enabled: true
+  cloud:
+    discovery:
+      client:
+        simple:
+          local:
+            uri: service-hi  #这个就是@Feign的value值！！！！
   application:
-    name: servicehi #服务之间的调用就是通过这个名字
+    name: service-hi #这是显示在注册中心上的名字
   zipkin:
     base-url: http://localhost/9411
     sender:
@@ -20,22 +21,19 @@ spring:
 
 eureka:
   client:
-#    fetch-registry: true #发现服务
-    register-with-eureka: false #注册服务
     service-url:   #这个service-url是对的
-#      default-Zone: http://peer1:8761/euraka/
       default-zone: http://localhost:8761/euraka/  #这个default-Zone是对的
   instance:
     prefer-ip-address: true
-    ip-address: 39.108.10.105
+#    ip-address: 39.108.10.105
     instance-id: ${spring.application.name}:${server.port} #注册的实例名称
-    hostname: service-hi
+#    instance-id: ${spring.cloud.client.ipAddress}:${server.port} #注册的实例名称
 
-ribbon:
-  ConnectTimeout: 60000 # ribbon链接超时时长
-  ReadTimeout: 60000 # ribbon读取超时时间长
-  eureka:
-    enabled: true
+#ribbon:
+#  ConnectTimeout: 60000 # ribbon链接超时时长
+#  ReadTimeout: 60000 # ribbon读取超时时间长
+#  eureka:
+#    enabled: true
 
 management:
   metrics:
