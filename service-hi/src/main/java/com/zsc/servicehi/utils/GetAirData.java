@@ -117,7 +117,11 @@ public class GetAirData {
             String status_code = jsonObject.getString("statusCode");
             if (status_code.equals("000000")) {
                 // 状态码为000000, 说明请求成功
-                JSONObject jsonResult = jsonObject.getJSONObject("result");
+                String resultStr = jsonObject.getString("result");
+                if(resultStr.equals("[]")){
+                    return airQuality;
+                }
+                JSONObject jsonResult = JSONObject.parseObject(resultStr);
                 PollutionEpisode pollutionEpisode = new PollutionEpisode();
                 pollutionEpisode.setAqi(jsonResult.get("AQI").toString());
                 pollutionEpisode.setCo(jsonResult.get("CO").toString());
