@@ -2,6 +2,12 @@ server:
   port: 8761
 
 spring:
+  security:
+    basic:
+      enabled: true
+    user:
+      name: root
+      password: booszy
   application:
     name: z-eureka
 
@@ -15,14 +21,17 @@ eureka:
 #    prefer-ip-address: true
 #    ip-address: 39.108.10.105
   client:
+    healthcheck:
+      enabled: true
     register-with-eureka: false
     fetch-registry: false #发现服务
-    service-url:
-      default-zone: http://${eureka.instance.hostname}:${server.port}/eureka/
 #    service-url:
-#      default-zone: http://${eureka.instance.hostname}:${server.port}/eureka/
+#      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    service-url:
+      default-zone: http://root:booszy@localhost:8761/eureka/
   server:
     enable-self-preservation: false
+    eviction-interval-timer-in-ms: 5000
 
 #spring:
 #  application:
