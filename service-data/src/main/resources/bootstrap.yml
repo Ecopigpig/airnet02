@@ -4,7 +4,7 @@ server:
 spring:
   security:
     basic:
-      enabled: true
+      enabled: false
     user:
       name: root
       password: booszy
@@ -50,9 +50,12 @@ spring:
 
   mail:
     #    host不配置会注入失败
-    host: smtp.163.com
-    username: ecochoupipig@163.com
-    password: mnc2017317725 #这是邮箱授权码，不是密码
+#    host: smtp.163.com
+#    username: ecochoupipig@163.com
+#    password: mnc2017317725 #这是邮箱授权码，不是密码host: smtp.163.com
+    host: smtp.qq.com
+    username: 1315943577@qq.com
+    password: radsmkjnthpyhafi#这是邮箱授权码，不是密码
     default-encoding: utf-8
     protocol: smtp
     properties:
@@ -79,9 +82,9 @@ eureka:
 #    fetch-registry: true #发现服务
 #    register-with-eureka: false #注册服务
     service-url:    #这个service-url是对的
-#      default-Zone: http://localhost:8761/euraka/  #这个default-Zone是对的
+      default-Zone: http://localhost:8761/euraka/  #这个default-Zone是对的
 #      defaultZone: http://39.108.10.105:8761/euraka/  #这个default-Zone是对的
-      defaultZone: http://root:booszy@39.108.10.105:8761/eureka/
+#      defaultZone: http://root:booszy@39.108.10.105:8761/eureka/
   instance:
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${server.port} #注册的实例名称

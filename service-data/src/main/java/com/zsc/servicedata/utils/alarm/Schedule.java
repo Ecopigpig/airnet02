@@ -42,7 +42,7 @@ public class Schedule {
     private HiFeignService hiFeignService;
 
 
-//    @Scheduled(fixedRate = 2000000)
+    @Scheduled(fixedRate = 2000000)
     public void checkIsAlarm() throws IOException {
         //每隔半小时去获取实时数据，与数据库中用户设定作对比，超过预设值就发邮件
         //先从缓存里头获取全国实时排行榜，从排行榜里头获取所有城市的监测点的浓度
@@ -128,7 +128,8 @@ public class Schedule {
             for (Long userId : markMap.keySet()) {
                 if (id.equals(userId)) {
                     SimpleMailMessage mailMessage = new SimpleMailMessage();
-                    mailMessage.setFrom("Ecochoupipig@163.com");
+//                    mailMessage.setFrom("Ecochoupipig@163.com");
+                    mailMessage.setFrom("1315943577@qq.com");
                     mailMessage.setTo(map.get(id));
                     mailMessage.setSubject("报警邮件");
                     MonitorMark monitorMark = markMap.get(userId);
