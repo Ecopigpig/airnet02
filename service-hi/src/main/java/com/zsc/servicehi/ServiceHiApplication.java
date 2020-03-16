@@ -70,9 +70,9 @@ public class ServiceHiApplication {
         //防止超时
         SimpleClientHttpRequestFactory simpleClientHttpRequestFactory = new SimpleClientHttpRequestFactory();
         //建立连接所用的时间 5s
-        simpleClientHttpRequestFactory.setConnectTimeout(5000);
+        simpleClientHttpRequestFactory.setConnectTimeout(60000);
         //服务器读取可用资源的时间 10s
-        simpleClientHttpRequestFactory.setReadTimeout(600000);
+        simpleClientHttpRequestFactory.setReadTimeout(60000);
         return new RestTemplate(simpleClientHttpRequestFactory);
     }
 

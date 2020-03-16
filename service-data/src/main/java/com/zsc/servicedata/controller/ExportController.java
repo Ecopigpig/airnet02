@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import model.air.HistoryAqiChart;
 import model.pollutant.PollutionEpisode;
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -21,6 +22,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Api(value = "ExportController",tags = "Excel导出控制器")
@@ -42,7 +45,7 @@ public class ExportController {
 
         HSSFWorkbook wb = new HSSFWorkbook();
 
-        HSSFSheet sheet = wb.createSheet("获取excel测试表格");
+        HSSFSheet sheet = wb.createSheet("全国各城市的污染情况历史记录SHEET1");
 
         HSSFRow row;
 
@@ -133,13 +136,13 @@ public class ExportController {
 
         HSSFWorkbook wb = new HSSFWorkbook();
 
-        HSSFSheet sheet = wb.createSheet("获取excel测试表格");
+        HSSFSheet sheet = wb.createSheet("空气质量历史排行榜SHEET1");
 
         HSSFRow row;
 
         row = sheet.createRow(0);//创建第一个单元格
         row.setHeight((short) (36.25 * 20));
-        row.createCell(0).setCellValue("全国各城市的污染情况历史记录");//为第一行单元格设值.
+        row.createCell(0).setCellValue("空气质量历史排行榜");//为第一行单元格设值.
 
         /*为标题设计空间
          * firstRow从第1行开始
@@ -179,7 +182,11 @@ public class ExportController {
             row.createCell(2).setCellValue(aqiChart.getAqi());
             row.createCell(3).setCellValue(aqiChart.getQuality());//为第三个单元格设值
             row.createCell(4).setCellValue(aqiChart.getRank());
-            row.createCell(5).setCellValue(aqiChart.getMarkTime());
+            String dateStr = aqiChart.getMarkTime().toString();
+            Date time =new Date(dateStr);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String timeFormat = sdf.format(time);
+            row.createCell(5).setCellValue(timeFormat);
         }
 
         sheet.setDefaultRowHeight((short) (16.5 * 20));
@@ -189,7 +196,7 @@ public class ExportController {
         }
         response.setContentType("application/vnd.ms-excel;charset=utf-8");
         OutputStream os = response.getOutputStream();
-        response.setHeader("Content-disposition", "attachment;filename=全国城市空气质量历史排行榜.xls");//默认Excel名称
+        response.setHeader("Content-disposition", "attachment;filename=空气质量历史排行榜.xls");//默认Excel名称
         wb.write(os);
         os.flush();
         os.close();

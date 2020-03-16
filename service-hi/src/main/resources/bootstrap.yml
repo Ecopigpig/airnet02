@@ -51,11 +51,11 @@ eureka:
     appname: service-hi
 #    instance-id: ${spring.cloud.client.ipAddress}:${server.port} #注册的实例名称
 
-#ribbon:
-#  ConnectTimeout: 60000 # ribbon链接超时时长
-#  ReadTimeout: 60000 # ribbon读取超时时间长
-#  eureka:
-#    enabled: true
+ribbon:
+  ConnectTimeout: 60000 # ribbon链接超时时长
+  ReadTimeout: 60000 # ribbon读取超时时间长
+  eureka:
+    enabled: true
 
 management:
   metrics:

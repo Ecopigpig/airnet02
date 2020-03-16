@@ -43,6 +43,10 @@ public class CityController {
 
     @PassToken
     @ApiOperation(value = "通过城市名称获取其对应的实时天气areaCode")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "city", value = "所在市名,不必带市字", required = true, dataType = "String"),
+            @ApiImplicitParam(paramType = "query", name = "area", value = "市内城市名称", required = true, dataType = "String")
+    })
     @RequestMapping(value = "/getAreaCode", method = RequestMethod.GET)
     public ResponseResult getAreaCode(@RequestParam("city") String city,
                                       @RequestParam("area")String area) {
@@ -101,7 +105,7 @@ public class CityController {
     }
 
     @ApiOperation(value = "按条件获取空气质量历史排行榜")
-    @RequestMapping(value = "/airQualityHistoryChart", method = RequestMethod.GET)
+    @RequestMapping(value = "/airQualityHistoryChart", method = RequestMethod.POST)
     public ResponseResult airQualityHistoryChart(@RequestBody AqiHistoryParam param) {
         ResponseResult result = new ResponseResult();
         result.setMsg(false);

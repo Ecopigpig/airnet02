@@ -55,7 +55,7 @@ spring:
 #    password: mnc2017317725 #这是邮箱授权码，不是密码host: smtp.163.com
     host: smtp.qq.com
     username: 1315943577@qq.com
-    password: radsmkjnthpyhafi#这是邮箱授权码，不是密码
+    password: radsmkjnthpyhafi #这是邮箱授权码，不是密码
     default-encoding: utf-8
     protocol: smtp
     properties:
@@ -95,11 +95,11 @@ eureka:
 #  basic:
 #    enabled: false
 
-#ribbon:
-#  ConnectTimeout: 10000 # ribbon链接超时时长
-#  ReadTimeout: 10000 # ribbon读取超时时间长
-#  eureka:
-#    enabled: true
+ribbon:
+  ConnectTimeout: 60000 # ribbon链接超时时长
+  ReadTimeout: 60000 # ribbon读取超时时间长
+  eureka:
+    enabled: true
 
 
 
