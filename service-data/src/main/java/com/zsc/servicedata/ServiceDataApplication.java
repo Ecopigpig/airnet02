@@ -32,10 +32,6 @@ import org.springframework.web.client.RestTemplate;
 //        "com.zsc.servicedata.service.Impl","com.zsc.servicedata.tag"})
 public class ServiceDataApplication {
 
-//    @Bean
-//    public RestTemplate getRestTemplate() {
-//        return new RestTemplate();
-//    }
 
     @Bean
     @LoadBalanced

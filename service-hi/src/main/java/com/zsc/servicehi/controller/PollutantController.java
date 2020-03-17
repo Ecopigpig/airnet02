@@ -105,7 +105,7 @@ public class PollutantController {
         PollutantCity pollutantCity = new PollutantCity();
         String key = city + "PollutionSituation";
         JSON json = (JSON) JSON.toJSON(redisTemplate.opsForValue().get(key));
-        Object javaObject = JSON.toJavaObject(json, AirQuality.class);
+        Object javaObject = JSON.toJavaObject(json, PollutantCity.class);
         if (javaObject == null) {
             //没有缓存就存进去
             pollutantCity = getPollutantData.getCityPollutionEpisode(city);

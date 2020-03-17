@@ -1,7 +1,9 @@
 package com.zsc.servicedata.service.feign;
 
+import model.pollutant.MonitorSite;
 import model.weather.AreaCode;
 import model.weather.InstanceWeather;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(value = "service-hi")
+@FeignClient(name = "service-hi",url = "http://39.108.10.105:8763")
 @Repository
 public interface HiFeignService {
 
@@ -21,4 +23,7 @@ public interface HiFeignService {
 
     @PostMapping("/weather/getInstanceWeather")
     InstanceWeather getInstanceWeather(@RequestParam String areaCode,@RequestParam String postalCode);
+
+    @PostMapping("/pollutant/offerSitesWithLocation")
+    List<MonitorSite> getSitesWithLocation();
 }

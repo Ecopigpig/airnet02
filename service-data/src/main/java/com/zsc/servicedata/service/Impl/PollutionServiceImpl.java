@@ -5,6 +5,7 @@ import com.zsc.servicedata.entity.param.PollutionMonitorParam;
 import com.zsc.servicedata.mapper.CityMapper;
 import com.zsc.servicedata.mapper.PollutionMapper;
 import com.zsc.servicedata.service.PollutionService;
+import com.zsc.servicedata.service.feign.HiFeignService;
 import model.air.HistoryAqiChart;
 import model.pollutant.MonitorSite;
 import model.pollutant.PollutionEpisode;
@@ -30,6 +31,9 @@ public class PollutionServiceImpl implements PollutionService {
     @Resource
     private CityMapper cityMapper;
 
+    @Resource
+    private HiFeignService hiFeignService;
+
 
     @Override
     public List<Pollutant> getMonitorListByUser(Long userId) {
@@ -54,6 +58,15 @@ public class PollutionServiceImpl implements PollutionService {
     public List<MonitorSite> getMonitorPointInCity(String city) {
         //先获取城市的监测点
         List<MonitorSite> monitorSiteList = cityMapper.selectMonitorSiteByCity(city);
+        if(monitorSiteList.size()==0){
+            //去调用接口获取其下的监测点
+            List<MonitorSite> siteList = hiFeignService.getSitesWithLocation();
+            siteList.forEach(site->{
+                if(site.getArea().contains(city)){
+                    monitorSiteList.add(site);
+                }
+            });
+        }
         return monitorSiteList;
     }
 
