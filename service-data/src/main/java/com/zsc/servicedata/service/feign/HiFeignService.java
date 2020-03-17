@@ -4,7 +4,7 @@ import model.weather.AreaCode;
 import model.weather.InstanceWeather;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -13,12 +13,12 @@ import java.util.List;
 @Repository
 public interface HiFeignService {
 
-    @GetMapping("/pollutant/offerNationPollutant")                        //此处名字需要和01服务的controller路径保持一致
+    @PostMapping("/pollutant/offerNationPollutant")                        //此处名字需要和01服务的controller路径保持一致
     String offerNationPollutant();
 
-    @GetMapping("/weather/getAreaCode")
+    @PostMapping("/weather/getAreaCode")
     List<AreaCode> getAreaCode(@RequestParam String city);
 
-    @GetMapping("/weather/getInstanceWeather")
+    @PostMapping("/weather/getInstanceWeather")
     InstanceWeather getInstanceWeather(@RequestParam String areaCode,@RequestParam String postalCode);
 }

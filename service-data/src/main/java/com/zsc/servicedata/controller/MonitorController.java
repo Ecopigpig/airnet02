@@ -33,7 +33,7 @@ public class MonitorController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "userId", value = "用户ID", required = true, dataType = "Long")
     })
-    @RequestMapping(value = "/getMonitorListByUser",method = RequestMethod.GET)
+    @RequestMapping(value = "/getMonitorListByUser",method = RequestMethod.POST)
     public ResponseResult getMonitorListByUser(@RequestParam Long userId){
         ResponseResult result = new ResponseResult();
         result.setMsg(false);
@@ -65,7 +65,7 @@ public class MonitorController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "city", value = "城市名称", required = true, dataType = "String")
     })
-    @RequestMapping(value = "/getMonitorPointInCity",method = RequestMethod.GET)
+    @RequestMapping(value = "/getMonitorPointInCity",method = RequestMethod.POST)
     public ResponseResult getMonitorPointInCity(@RequestParam String city) throws Exception {
         ResponseResult result = new ResponseResult();
         result.setMsg(false);

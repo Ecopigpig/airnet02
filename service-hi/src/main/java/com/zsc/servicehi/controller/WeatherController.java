@@ -41,11 +41,11 @@ public class WeatherController {
     StringRedisTemplate stringRedisTemplate;
 
     //这个链接能拿到数据
-    @ApiOperation(value = "根据城市中文名获取该城市的未来24小时天气情况,专供服务调用")
+    @ApiOperation(value = "根据城市中文名获取该城市的未来24小时天气情况,专供服务调用,目前是实时获取")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "city", value = "城市名称", required = true, dataType = "String")
     })
-    @RequestMapping(value = "/get24HourData",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/get24HourData",method = {RequestMethod.POST})
     public List<Weather24Hours> get24HourData(@RequestParam String city) {
         GetWeatherData getWeatherData = new GetWeatherData();
         List<Weather24Hours> weather24HoursList = getWeatherData.get24HourWeather(city);
@@ -53,11 +53,11 @@ public class WeatherController {
     }
 
 
-    @ApiOperation(value = "根据城市中文名获取该城市的所有地区代码,专供服务调用")
+    @ApiOperation(value = "根据城市中文名获取该城市的所有地区代码,专供服务调用,目前是实时获取")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "city", value = "城市名称,如:广州", required = true, dataType = "String")
     })
-    @RequestMapping(value = "/getAreaCode",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/getAreaCode",method = {RequestMethod.POST})
     public List<AreaCode> getAreaCode(@RequestParam String city) {
         GetWeatherData getWeatherData = new GetWeatherData();
         List<AreaCode> areaCodeList = getWeatherData.getAreaCode(city);
@@ -69,7 +69,7 @@ public class WeatherController {
             @ApiImplicitParam(paramType = "query", name = "areaCode", value = "城市区号，如:0763", required = true, dataType = "String"),
             @ApiImplicitParam(paramType = "query", name = "postalCode", value = "城市邮政编码6位数字", required = true, dataType = "String")
     })
-    @RequestMapping(value = "/getInstanceWeather",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/getInstanceWeather",method = {RequestMethod.POST})
     public InstanceWeather getInstanceWeather(@RequestParam String areaCode, @RequestParam String postalCode) {
         GetWeatherData getWeatherData = new GetWeatherData();
         InstanceWeather instanceWeather = getWeatherData.getInstanceTimeWeather(areaCode,postalCode);
@@ -80,7 +80,7 @@ public class WeatherController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "city", value = "城市名称", required = true, dataType = "String")
     })
-    @RequestMapping(value = "/get24Hour",method = RequestMethod.GET)
+    @RequestMapping(value = "/get24Hour",method = RequestMethod.POST)
     public ResponseResult get24Hour(@RequestParam String city) {
         GetWeatherData getWeatherData = new GetWeatherData();
         List<Weather24Hours> weather24HoursList = new ArrayList<>();
@@ -120,7 +120,7 @@ public class WeatherController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "city", value = "城市名称", required = true, dataType = "String")
     })
-    @RequestMapping(value = "/getIn15Days",method = RequestMethod.GET)
+    @RequestMapping(value = "/getIn15Days",method = RequestMethod.POST)
     public ResponseResult getIn15Days(@RequestParam String city) {
         GetWeatherData getWeatherData = new GetWeatherData();
         List<WeatherIn15Days> weatherIn15DaysList = getWeatherData.getWeatherIn15Days(city);

@@ -22,9 +22,12 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 @Api(value = "ExportController",tags = "Excel导出控制器")
 @RestController
@@ -39,7 +42,7 @@ public class ExportController {
 
     //尝试excel的导出
     @ApiOperation(value = "导出全国的历史污染情况")
-    @RequestMapping(value = "/pollutantHistory",method = RequestMethod.GET)
+    @RequestMapping(value = "/pollutantHistory",method = RequestMethod.POST)
     public void exportPollutantHistory(HttpServletResponse response) throws IOException{
         List<PollutionEpisode> pollutionEpisodeList = pollutionService.getPollutantHistory();
 
@@ -120,8 +123,8 @@ public class ExportController {
     }
 
     @ApiOperation(value = "按条件导出空气质量历史排行榜")
-    @RequestMapping(value = "/airHistory",method = RequestMethod.GET)
-    public void exportAirHistory(HttpServletResponse response, @RequestBody AqiHistoryParam param) throws IOException{
+    @RequestMapping(value = "/airHistory",method = RequestMethod.POST)
+    public void exportAirHistory(HttpServletResponse response, @RequestBody AqiHistoryParam param) throws IOException, ParseException {
         //参数校验
         if(param.getSize()==null||param.getSize()<=0) param.setSize(10L);
         if(param.getOrder()==null||param.getOrder().equals("")){
@@ -183,9 +186,9 @@ public class ExportController {
             row.createCell(3).setCellValue(aqiChart.getQuality());//为第三个单元格设值
             row.createCell(4).setCellValue(aqiChart.getRank());
             String dateStr = aqiChart.getMarkTime().toString();
-            Date time =new Date(dateStr);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String timeFormat = sdf.format(time);
+            Date date = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US).parse(dateStr);
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String timeFormat = format.format(date);
             row.createCell(5).setCellValue(timeFormat);
         }
 

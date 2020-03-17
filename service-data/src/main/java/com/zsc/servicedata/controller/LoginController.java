@@ -11,7 +11,10 @@ import io.swagger.annotations.ApiOperation;
 import model.result.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.concurrent.TimeUnit;
 
 
 @Api(value = "LoginController", tags = "登录控制器")
@@ -27,6 +30,9 @@ public class LoginController {
 
     @Autowired
     RedisTemplate redisTemplate;
+
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
 
 
     @ApiOperation(value = "用户登录")
@@ -51,6 +57,7 @@ public class LoginController {
                 if (tokenStr == null) {
                     token = tokenService.getToken(userForBase);
                     redisTemplate.opsForValue().set(userForBase.getId() + "token", token);
+                    stringRedisTemplate.expire(userForBase.getId() + "token", 30, TimeUnit.MINUTES);
                 } else {
                     token = tokenStr;
                 }

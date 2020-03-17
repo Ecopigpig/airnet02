@@ -45,7 +45,7 @@ public class PollutantController {
      * @return
      */
     @ApiOperation(value = "通过城市名称获取该城市下的检测点名称,专供服务调用")
-    @RequestMapping(value = "/offerPollutantSites", method = RequestMethod.GET)
+    @RequestMapping(value = "/offerPollutantSites", method = RequestMethod.POST)
     public Map<String, List<String>> offerPollutantSites(@RequestParam String city) {
         GetPollutantData getPollutantData = new GetPollutantData();
         Map<String, List<String>> map = new HashMap<>();
@@ -78,7 +78,7 @@ public class PollutantController {
 
 
     @ApiOperation(value = "获取全国城市下的检测点名称包括其经纬度,专供服务调用")
-    @RequestMapping(value = "/offerSitesWithLocation", method = RequestMethod.GET)
+    @RequestMapping(value = "/offerSitesWithLocation", method = RequestMethod.POST)
     public List<MonitorSite> offerSitesWithLocation() {
         GetPollutantData getPollutantData = new GetPollutantData();
         List<MonitorSite> list = getPollutantData.getSitesWithLocation();
@@ -87,7 +87,7 @@ public class PollutantController {
 
     //直接获取实时的数据吧，不要经过缓存了
     @ApiOperation(value = "全国污染排行榜,专供服务调用")
-    @RequestMapping(value = "/offerNationPollutant", method = RequestMethod.GET)
+    @RequestMapping(value = "/offerNationPollutant", method = RequestMethod.POST)
     public List<PollutantCity> offerNationPollutant() {
         GetPollutantData getPollutantData = new GetPollutantData();
         List<PollutantCity> pollutantCityList = getPollutantData.getNationPollutantRank();
@@ -99,7 +99,7 @@ public class PollutantController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "city", value = "城市名称", required = true, dataType = "String")
     })
-    @RequestMapping(value = "/getCity", method = RequestMethod.GET)
+    @RequestMapping(value = "/getCity", method = RequestMethod.POST)
     public ResponseResult getCity(@RequestParam String city) {
         GetPollutantData getPollutantData = new GetPollutantData();
         PollutantCity pollutantCity = new PollutantCity();
@@ -126,12 +126,13 @@ public class PollutantController {
     }
 
 
+    //这里等到没有问题之后，换成pageInfo分页
     @ApiOperation(value = "获取全国PM2.5指数排行榜")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "page", value = "页码,默认1", dataType = "int"),
             @ApiImplicitParam(paramType = "query", name = "size", value = "页面大小,默认20", dataType = "int")
     })
-    @RequestMapping(value = "/getNation", method = RequestMethod.GET)
+    @RequestMapping(value = "/getNation", method = RequestMethod.POST)
     public ResponseResult getNation(@RequestParam(value = "page", defaultValue = "1") int pageIndex,
                                     @RequestParam(value = "size", defaultValue = "20") int pageSize) {
         GetPollutantData getPollutantData = new GetPollutantData();

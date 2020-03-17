@@ -27,16 +27,11 @@ import java.util.List;
 public class CityController {
 
     @Resource
-    private RestTemplate restTemplate;
-
-    @Resource
     private CityService cityService;
 
     @Resource
     private AirService airService;
 
-    @Autowired
-    private PollutionService pollutionService;
 
     @Autowired
     private HiFeignService hiFeignService;
@@ -47,7 +42,7 @@ public class CityController {
             @ApiImplicitParam(paramType = "query", name = "city", value = "所在市名,不必带市字", required = true, dataType = "String"),
             @ApiImplicitParam(paramType = "query", name = "area", value = "市内城市名称", required = true, dataType = "String")
     })
-    @RequestMapping(value = "/getAreaCode", method = RequestMethod.GET)
+    @RequestMapping(value = "/getAreaCode", method = RequestMethod.POST)
     public ResponseResult getAreaCode(@RequestParam("city") String city,
                                       @RequestParam("area")String area) {
         ResponseResult result = new ResponseResult();
@@ -80,7 +75,7 @@ public class CityController {
             @ApiImplicitParam(paramType = "query", name = "city", value = "所在市名,不必带市字", required = true, dataType = "String"),
             @ApiImplicitParam(paramType = "query", name = "area", value = "市内城市名称", required = true, dataType = "String")
     })
-    @RequestMapping(value = "/getActualTimeWeather",method = RequestMethod.GET)
+    @RequestMapping(value = "/getActualTimeWeather",method = RequestMethod.POST)
     public ResponseResult getActualTimeWeather(@RequestParam String city,@RequestParam String area) {
         ResponseResult result = new ResponseResult();
         result.setMsg(false);
@@ -90,6 +85,7 @@ public class CityController {
         if(areaCode==null) {
             List<AreaCode> areaCodeList = hiFeignService.getAreaCode(city);
             int i = cityService.insertAreaCode(areaCodeList);
+            //如果这里再次出现两个相同记录的bug情况,就把返回值改成list再去取第一个即可。
             if(i>0) {
                 areaCode = cityService.selectCodeByAreaName(city,area);
             }

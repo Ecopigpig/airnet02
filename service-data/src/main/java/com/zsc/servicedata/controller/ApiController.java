@@ -24,7 +24,7 @@ public class ApiController {
     TokenService tokenService;
 
     @ApiOperation(value = "用户获取其申请的API")
-    @RequestMapping(value = "/getApi", method = RequestMethod.GET)
+    @RequestMapping(value = "/getApi", method = RequestMethod.POST)
     public ResponseResult getApi(@RequestParam("userId") Long userId, @RequestParam("password")String password) {
         ResponseResult result = new ResponseResult();
         UserInfo user = new UserInfo();

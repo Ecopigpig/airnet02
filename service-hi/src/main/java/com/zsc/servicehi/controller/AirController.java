@@ -34,7 +34,7 @@ public class AirController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "city", value = "城市名称,一定要带市字", required = true, dataType = "String")
     })
-    @RequestMapping(value = "/getAirQuality", method = RequestMethod.GET)
+    @RequestMapping(value = "/getAirQuality", method = RequestMethod.POST)
     public ResponseResult getAirQuality(@RequestParam String city) {
         GetAirData airData = new GetAirData();
         AirQuality airQuality = new AirQuality();
