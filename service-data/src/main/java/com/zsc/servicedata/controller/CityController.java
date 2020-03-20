@@ -1,6 +1,7 @@
 package com.zsc.servicedata.controller;
 
 import com.zsc.servicedata.entity.param.AqiHistoryParam;
+import com.zsc.servicedata.entity.param.DetailCityParam;
 import com.zsc.servicedata.service.AirService;
 import com.zsc.servicedata.service.CityService;
 import com.zsc.servicedata.service.PollutionService;
@@ -43,8 +44,9 @@ public class CityController {
             @ApiImplicitParam(paramType = "query", name = "area", value = "市内城市名称", required = true, dataType = "String")
     })
     @RequestMapping(value = "/getAreaCode", method = RequestMethod.POST)
-    public ResponseResult getAreaCode(@RequestParam("city") String city,
-                                      @RequestParam("area")String area) {
+    public ResponseResult getAreaCode(@RequestBody DetailCityParam param) {
+        String city = param.getCity();
+        String area = param.getArea();
         ResponseResult result = new ResponseResult();
         result.setMsg(false);
         //先去数据库里面查询,是否有这个城市的areaCode
@@ -76,7 +78,9 @@ public class CityController {
             @ApiImplicitParam(paramType = "query", name = "area", value = "市内城市名称", required = true, dataType = "String")
     })
     @RequestMapping(value = "/getActualTimeWeather",method = RequestMethod.POST)
-    public ResponseResult getActualTimeWeather(@RequestParam String city,@RequestParam String area) {
+    public ResponseResult getActualTimeWeather(@RequestBody DetailCityParam param) {
+        String city = param.getCity();
+        String area = param.getArea();
         ResponseResult result = new ResponseResult();
         result.setMsg(false);
         //先去获取城市的代码

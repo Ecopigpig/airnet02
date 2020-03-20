@@ -7,10 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import model.result.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Api(value = "ApiController",tags = "API控制器")
 @RestController
@@ -25,7 +22,9 @@ public class ApiController {
 
     @ApiOperation(value = "用户获取其申请的API")
     @RequestMapping(value = "/getApi", method = RequestMethod.POST)
-    public ResponseResult getApi(@RequestParam("userId") Long userId, @RequestParam("password")String password) {
+    public ResponseResult getApi(@RequestBody UserInfo userInfo) {
+        Long userId = userInfo.getId();
+        String password = userInfo.getPassword();
         ResponseResult result = new ResponseResult();
         UserInfo user = new UserInfo();
         user.setId(userId);

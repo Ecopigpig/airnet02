@@ -52,14 +52,11 @@ public class LoginController {
                 result.setData(jsonObject);
                 return result;
             } else {
-                String token="";
-                String tokenStr = (String) redisTemplate.opsForValue().get(userForBase.getId() + "token");
-                if (tokenStr == null) {
+                String token = (String) redisTemplate.opsForValue().get(userForBase.getId() + "token");
+                if (token == null) {
                     token = tokenService.getToken(userForBase);
                     redisTemplate.opsForValue().set(userForBase.getId() + "token", token);
                     stringRedisTemplate.expire(userForBase.getId() + "token", 30, TimeUnit.MINUTES);
-                } else {
-                    token = tokenStr;
                 }
                 jsonObject.put("token", token);
                 jsonObject.put("user",userForBase);

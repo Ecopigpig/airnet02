@@ -11,12 +11,11 @@ import model.result.ResponseResult;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Api(value = "AirController", tags = "空气质量控制器")
@@ -35,9 +34,10 @@ public class AirController {
             @ApiImplicitParam(paramType = "query", name = "city", value = "城市名称,一定要带市字", required = true, dataType = "String")
     })
     @RequestMapping(value = "/getAirQuality", method = RequestMethod.POST)
-    public ResponseResult getAirQuality(@RequestParam String city) {
+    public ResponseResult getAirQuality(@RequestBody Map<String, String> map) {
         GetAirData airData = new GetAirData();
         AirQuality airQuality = new AirQuality();
+        String city = map.get("city");
         String key = city + "AirQuality";
         JSON json = (JSON) JSON.toJSON(redisTemplate.opsForValue().get(key));
         Object javaObject = JSON.toJavaObject(json, AirQuality.class);

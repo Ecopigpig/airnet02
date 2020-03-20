@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Api(value = "MonitorController",tags = "监测控制器")
 @RestController
@@ -34,7 +35,8 @@ public class MonitorController {
             @ApiImplicitParam(paramType = "query", name = "userId", value = "用户ID", required = true, dataType = "Long")
     })
     @RequestMapping(value = "/getMonitorListByUser",method = RequestMethod.POST)
-    public ResponseResult getMonitorListByUser(@RequestParam Long userId){
+    public ResponseResult getMonitorListByUser(@RequestBody Map<String,Long> map){
+        Long userId = map.get("userId");
         ResponseResult result = new ResponseResult();
         result.setMsg(false);
         List<Pollutant> pollutantList = pollutionService.getMonitorListByUser(userId);
@@ -66,9 +68,10 @@ public class MonitorController {
             @ApiImplicitParam(paramType = "query", name = "city", value = "城市名称", required = true, dataType = "String")
     })
     @RequestMapping(value = "/getMonitorPointInCity",method = RequestMethod.POST)
-    public ResponseResult getMonitorPointInCity(@RequestParam String city) throws Exception {
+    public ResponseResult getMonitorPointInCity(@RequestBody Map<String,String> map) throws Exception {
         ResponseResult result = new ResponseResult();
         result.setMsg(false);
+        String city = map.get("city");
         List<MonitorSite> monitorSiteList = pollutionService.getMonitorPointInCity(city);
         if(monitorSiteList.size()>0){
             result.setMsg(true);

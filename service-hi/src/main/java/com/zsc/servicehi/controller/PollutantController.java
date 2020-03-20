@@ -1,6 +1,9 @@
 package com.zsc.servicehi.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.zsc.servicehi.entity.PageParam;
 import com.zsc.servicehi.utils.GetPollutantData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -16,10 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,16 +41,17 @@ public class PollutantController {
     /**
      * 提供给service-data获取城市监测点名称列表,此接口仅提供名称
      *
-     * @param city
+     * @param paramMap
      * @return
      */
     @ApiOperation(value = "通过城市名称获取该城市下的检测点名称,专供服务调用")
     @RequestMapping(value = "/offerPollutantSites", method = RequestMethod.POST)
-    public Map<String, List<String>> offerPollutantSites(@RequestParam String city) {
+    public Map<String, List<String>> offerPollutantSites(@RequestBody Map<String, String> paramMap) {
         GetPollutantData getPollutantData = new GetPollutantData();
         Map<String, List<String>> map = new HashMap<>();
         List<String> list = new ArrayList<>();
         PollutantCity pollutantCity = new PollutantCity();
+        String city = paramMap.get("city");
         String key = city + "PollutantSites";
         JSON json = (JSON) JSON.toJSON(redisTemplate.opsForValue().get(key));
         Object javaObject = JSON.toJavaObject(json, PollutantCity.class);
@@ -99,9 +100,10 @@ public class PollutantController {
             @ApiImplicitParam(paramType = "query", name = "city", value = "城市名称", required = true, dataType = "String")
     })
     @RequestMapping(value = "/getCity", method = RequestMethod.POST)
-    public ResponseResult getCity(@RequestParam String city) {
+    public ResponseResult getCity(@RequestBody Map<String, String> map) {
         GetPollutantData getPollutantData = new GetPollutantData();
         PollutantCity pollutantCity = new PollutantCity();
+        String city = map.get("city");
         String key = city + "PollutionSituation";
         JSON json = (JSON) JSON.toJSON(redisTemplate.opsForValue().get(key));
         Object javaObject = JSON.toJavaObject(json, PollutantCity.class);
@@ -136,8 +138,9 @@ public class PollutantController {
             @ApiImplicitParam(paramType = "query", name = "size", value = "页面大小,默认20", dataType = "int")
     })
     @RequestMapping(value = "/getNation", method = RequestMethod.POST)
-    public ResponseResult getNation(@RequestParam(value = "page", defaultValue = "1") int pageIndex,
-                                    @RequestParam(value = "size", defaultValue = "20") int pageSize) {
+    public ResponseResult getNation(@RequestBody PageParam pageParam) {
+        int pageIndex = pageParam.getPage()<=0?1:pageParam.getPage();
+        int pageSize = pageParam.getSize()<=0?20:pageParam.getSize();
         GetPollutantData getPollutantData = new GetPollutantData();
         List<PollutantCity> pollutantCityList = new ArrayList<>();
         List<PollutantCity> redisList = new ArrayList<>();

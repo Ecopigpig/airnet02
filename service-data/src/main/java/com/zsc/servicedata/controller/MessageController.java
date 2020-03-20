@@ -3,6 +3,7 @@ package com.zsc.servicedata.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zsc.servicedata.entity.alarm.Message;
+import com.zsc.servicedata.entity.param.MessagePageParam;
 import com.zsc.servicedata.entity.result.ResponseResult;
 import com.zsc.servicedata.service.MessageService;
 import io.swagger.annotations.Api;
@@ -30,9 +31,10 @@ public class MessageController {
             @ApiImplicitParam(paramType = "query", name = "size", value = "页面大小,默认20", dataType = "int")
     })
     @RequestMapping(value = "/getUserMessageList",method = RequestMethod.POST)
-    public ResponseResult getUserMessageList(@RequestParam(value = "page", defaultValue = "1") int pageIndex,
-                                             @RequestParam(value = "size", defaultValue = "20") int pageSize,
-                                             @RequestParam("userId")Long userId){
+    public ResponseResult getUserMessageList(@RequestBody MessagePageParam param){
+        int pageIndex = param.getPage();
+        int pageSize = param.getSize();
+        Long userId = param.getUserId();
         ResponseResult result = new ResponseResult();
         result.setMsg(true);
         PageHelper.startPage(pageIndex,pageSize);
@@ -50,9 +52,10 @@ public class MessageController {
             @ApiImplicitParam(paramType = "query", name = "messageId", value = "站内信ID", required = true, dataType = "Long")
     })
     @RequestMapping(value = "/getMessageContext",method = RequestMethod.POST)
-    public ResponseResult getMessageContext(@RequestParam("messageId")Long messageId){
+    public ResponseResult getMessageContext(@RequestBody Map<String,Long> map){
         ResponseResult result = new ResponseResult();
         result.setMsg(false);
+        Long messageId = map.get("messageId");
         Message message = messageService.getMessageContext(messageId);
         if(message!=null){
             result.setMsg(true);
@@ -66,9 +69,10 @@ public class MessageController {
             @ApiImplicitParam(paramType = "query", name = "messageId", value = "站内信ID", required = true, dataType = "Long")
     })
     @RequestMapping(value = "/updateMessageRead",method = RequestMethod.POST)
-    public ResponseResult updateMessageRead(@RequestParam("messageId")Long messageId){
+    public ResponseResult updateMessageRead(@RequestBody Map<String,Long> map){
         ResponseResult result = new ResponseResult();
         result.setMsg(false);
+        Long messageId = map.get("messageId");
         int i = messageService.updateMessageRead(messageId);
         if(i>0){
             result.setMsg(true);
@@ -98,7 +102,8 @@ public class MessageController {
             @ApiImplicitParam(paramType = "query", name = "messageId", value = "站内信ID", required = true, dataType = "Long")
     })
     @RequestMapping(value = "/selectCountInCondition",method = RequestMethod.POST)
-    public ResponseResult selectCountInCondition(@RequestParam("userId")Long userId){
+    public ResponseResult selectCountInCondition(@RequestBody Map<String,Long> paramMap){
+        Long userId = paramMap.get("userId");
         ResponseResult result = new ResponseResult();
         result.setMsg(true);
         Map<String,Integer> map = messageService.selectCountInCondition(userId);

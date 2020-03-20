@@ -1,6 +1,7 @@
 package com.zsc.servicehi.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.zsc.servicehi.entity.CityCode;
 import com.zsc.servicehi.utils.GetWeatherData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -17,14 +18,12 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Api(value = "WeatherController", tags = "天气控制器")
@@ -46,8 +45,9 @@ public class WeatherController {
             @ApiImplicitParam(paramType = "query", name = "city", value = "城市名称", required = true, dataType = "String")
     })
     @RequestMapping(value = "/get24HourData",method = {RequestMethod.POST})
-    public List<Weather24Hours> get24HourData(@RequestParam String city) {
+    public List<Weather24Hours> get24HourData(@RequestBody Map<String, String> map) {
         GetWeatherData getWeatherData = new GetWeatherData();
+        String city = map.get("city");
         List<Weather24Hours> weather24HoursList = getWeatherData.get24HourWeather(city);
         return weather24HoursList;
     }
@@ -58,8 +58,9 @@ public class WeatherController {
             @ApiImplicitParam(paramType = "query", name = "city", value = "城市名称,如:广州", required = true, dataType = "String")
     })
     @RequestMapping(value = "/getAreaCode",method = {RequestMethod.POST})
-    public List<AreaCode> getAreaCode(@RequestParam String city) {
+    public List<AreaCode> getAreaCode(@RequestBody Map<String, String> map) {
         GetWeatherData getWeatherData = new GetWeatherData();
+        String city = map.get("city");
         List<AreaCode> areaCodeList = getWeatherData.getAreaCode(city);
         return areaCodeList;
     }
@@ -70,7 +71,9 @@ public class WeatherController {
             @ApiImplicitParam(paramType = "query", name = "postalCode", value = "城市邮政编码6位数字", required = true, dataType = "String")
     })
     @RequestMapping(value = "/getInstanceWeather",method = {RequestMethod.POST})
-    public InstanceWeather getInstanceWeather(@RequestParam String areaCode, @RequestParam String postalCode) {
+    public InstanceWeather getInstanceWeather(@RequestBody CityCode cityCode) {
+        String areaCode = cityCode.getAreaCode();
+        String postalCode = cityCode.getPostalCode();
         GetWeatherData getWeatherData = new GetWeatherData();
         InstanceWeather instanceWeather = getWeatherData.getInstanceTimeWeather(areaCode,postalCode);
         return instanceWeather;
@@ -81,11 +84,12 @@ public class WeatherController {
             @ApiImplicitParam(paramType = "query", name = "city", value = "城市名称", required = true, dataType = "String")
     })
     @RequestMapping(value = "/get24Hour",method = RequestMethod.POST)
-    public ResponseResult get24Hour(@RequestParam String city) {
+    public ResponseResult get24Hour(@RequestBody Map<String, String> map) {
         GetWeatherData getWeatherData = new GetWeatherData();
         List<Weather24Hours> weather24HoursList = new ArrayList<>();
         List<Weather24Hours> redisList = new ArrayList<>();
         //每次响应都要去redis看看有没有这个value可以去取
+        String city = map.get("city");
         String key = city + "24HourWeather";
         Long length = redisTemplate.opsForList().size(key);
         for (Long i = 0L; i < length; i++) {
@@ -121,8 +125,9 @@ public class WeatherController {
             @ApiImplicitParam(paramType = "query", name = "city", value = "城市名称", required = true, dataType = "String")
     })
     @RequestMapping(value = "/getIn15Days",method = RequestMethod.POST)
-    public ResponseResult getIn15Days(@RequestParam String city) {
+    public ResponseResult getIn15Days(@RequestBody Map<String, String> map) {
         GetWeatherData getWeatherData = new GetWeatherData();
+        String city = map.get("city");
         List<WeatherIn15Days> weatherIn15DaysList = getWeatherData.getWeatherIn15Days(city);
         List<WeatherIn15Days> redisList = new ArrayList<>();
         //每次响应都要去redis看看有没有这个value可以去取
