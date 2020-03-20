@@ -34,6 +34,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
+        <!--据说加了这个会解决hi服务无异常停止-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <!--只要加了这两个依赖，就会开启eureka注册中心的验证-->
         <dependency>
             <groupId>org.springframework.security</groupId>

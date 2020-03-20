@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zsc.servicedata.mapper.MessageMapper">
+
+    <resultMap id="MessageMap" type="com.zsc.servicedata.entity.alarm.Message">
+        <id column="id" property="id" javaType="Long"/>
+        <result column="userId" property="userId" javaType="Long"/>
+        <result column="context" property="context" javaType="String"/>
+        <result column="isRead" property="isRead" javaType="Byte"/>
+        <result column="sendTime" property="sendTime" javaType="Date"/>
+    </resultMap>
+
+    <insert id="insertNewMessage" parameterType="com.zsc.servicedata.entity.alarm.Message">
+        INSERT INTO message (userId,context,sendTime,isRead)
+        VALUES (#{userId},#{context},#{sendTime},#{isRead})
+    </insert>
+
+    <select id="selectMessageListByUser" resultMap="MessageMap">
+        SELECT * FROM message WHERE userId = #{userId}
+    </select>
+
+    <update id="updateMessageRead">
+        UPDATE message SET isRead = 1 WHERE id = #{id}
+    </update>
+
+    <delete id="deleteMessage">
+        DELETE FROM message WHERE id in
+        (
+          <foreach collection="list" item="item" index="index" separator=",">
+              #{item}
+          </foreach>
+        )
+    </delete>
+
+    <select id="selectCountInCondition" resultType="java.lang.Integer">
+        <if test="status == -1">
+            SELECT COUNT(*) FROM message WHERE userId = #{userId}
+        </if>
+        <if test="status == 0">
+            SELECT COUNT(*) FROM message WHERE isRead = 0 AND userId = #{userId}
+        </if>
+        <if test="status == 1">
+            SELECT COUNT(*) FROM message WHERE isRead = 1 AND userId = #{userId}
+        </if>
+    </select>
+
+    <select id="getMessageContext" resultType="com.zsc.servicedata.entity.alarm.Message">
+        SELECT * FROM message WHERE id = #{id}
+    </select>
+</mapper>

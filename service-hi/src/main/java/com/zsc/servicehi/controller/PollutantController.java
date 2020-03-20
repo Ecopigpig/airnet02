@@ -76,7 +76,6 @@ public class PollutantController {
         return map;
     }
 
-
     @ApiOperation(value = "获取全国城市下的检测点名称包括其经纬度,专供服务调用")
     @RequestMapping(value = "/offerSitesWithLocation", method = RequestMethod.POST)
     public List<MonitorSite> offerSitesWithLocation() {
@@ -119,7 +118,11 @@ public class PollutantController {
         result.setMsg(false);
         if (pollutantCity != null) {
             result.setMsg(true);
-            result.setTotal(Long.valueOf(pollutantCity.getPollutionSiteList().size()));
+            if(pollutantCity.getPollutionSiteList().size()==0){
+                result.setTotal(0L);
+            }else {
+                result.setTotal(Long.valueOf(pollutantCity.getPollutionSiteList().size()));
+            }
         }
         result.setData(pollutantCity);
         return result;

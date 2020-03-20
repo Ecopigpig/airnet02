@@ -3,11 +3,14 @@ package com.zsc.servicedata.utils.alarm;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zsc.servicedata.entity.alarm.Message;
 import com.zsc.servicedata.entity.alarm.MonitorMark;
 import com.zsc.servicedata.entity.data.Pollutant;
+import com.zsc.servicedata.service.MessageService;
 import com.zsc.servicedata.service.PollutionService;
 import com.zsc.servicedata.service.UserService;
 import com.zsc.servicedata.service.feign.HiFeignService;
+import com.zsc.servicedata.utils.websocket.WebSocketServer;
 import model.air.HistoryAqiChart;
 import model.pollutant.PollutionEpisode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +44,11 @@ public class Schedule {
     @Autowired
     private HiFeignService hiFeignService;
 
+    @Autowired
+    private MessageService messageService;
 
-//    @Scheduled(fixedRate = 2000000)
+
+    @Scheduled(fixedRate = 2000000)
     public void checkIsAlarm() throws IOException {
         //每隔半小时去获取实时数据，与数据库中用户设定作对比，超过预设值就发邮件
         //先从缓存里头获取全国实时排行榜，从排行榜里头获取所有城市的监测点的浓度
@@ -135,6 +141,16 @@ public class Schedule {
                     MonitorMark monitorMark = markMap.get(userId);
                     mailMessage.setText(monitorMark.getAlarmText());
                     jms.send(mailMessage);
+                    //同时实现站内信的插入与向前端的通知
+                    Message message = new Message();
+                    message.setSendTime(new Date());
+                    message.setContext(monitorMark.getAlarmText());
+                    message.setIsRead((byte)0);
+                    message.setUserId(id);
+                    int i = messageService.insertNewMessage(message);
+                    if(i>0) {
+                        WebSocketServer.sendAlarmMessageInSide(monitorMark.getAlarmText(), id.toString());
+                    }
                 }
             }
         }
