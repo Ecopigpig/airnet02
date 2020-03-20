@@ -1,10 +1,11 @@
+#remote
 server:
   port: 8761
 
 spring:
   security:
     basic:
-      enabled: false #true为开启验证
+      enabled: true
     user:
       name: root
       password: booszy
@@ -25,10 +26,16 @@ eureka:
       enabled: true
     register-with-eureka: false
     fetch-registry: false #发现服务
-    service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 #    service-url:
-#      default-zone: http://root:booszy@localhost:8761/eureka/
+#      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    service-url:
+      default-zone: http://root:booszy@localhost:8761/eureka/
   server:
     enable-self-preservation: false
     eviction-interval-timer-in-ms: 5000
+
+#spring:
+#  application:
+#    name: eurka-server
+#  profiles:
+#    active: peer1  #此处决定启用哪个注册中心
