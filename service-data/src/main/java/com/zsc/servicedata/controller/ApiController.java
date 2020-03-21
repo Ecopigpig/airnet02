@@ -9,6 +9,8 @@ import model.result.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @Api(value = "ApiController",tags = "API控制器")
 @RestController
 @RequestMapping("/api")
@@ -22,14 +24,10 @@ public class ApiController {
 
     @ApiOperation(value = "用户获取其申请的API")
     @RequestMapping(value = "/getApi", method = RequestMethod.POST)
-    public ResponseResult getApi(@RequestBody UserInfo userInfo) {
-        Long userId = userInfo.getId();
-        String password = userInfo.getPassword();
+    public ResponseResult getApi(@RequestBody Map<String,Long> map) {
         ResponseResult result = new ResponseResult();
-        UserInfo user = new UserInfo();
-        user.setId(userId);
-        user.setPassword(password);
-        UserInfo userForBase = userService.confirmUser(user);
+        Long userId = map.get("id");
+        UserInfo userForBase = userService.getUserById(userId);
         result.setMsg(false);
         if(userForBase == null){
             //数据库中没有这个用户，就是说连申请用API的资格都没有
@@ -43,13 +41,20 @@ public class ApiController {
                 result.setData("请先去申请API,审核通过后即可获得API");
                 return result;
             }else{
-                //生成API
-                String token = tokenService.getAPIToken(userForBase);
-                //把它存到用户API数据表中
-                int i =userService.insertToken(userForBase.getId(),token);
-                if(i>0){
+                String token = userForBase.getToken();
+                if(token!=null){
                     result.setMsg(true);
                     result.setData(token);
+                    return result;
+                }else{
+                    //生成API
+                    token = tokenService.getAPIToken(userForBase);
+                    //把它存到用户API数据表中
+                    int i =userService.insertToken(userForBase.getId(),token);
+                    if(i>0){
+                        result.setMsg(true);
+                        result.setData(token);
+                    }
                 }
                 return result;
             }

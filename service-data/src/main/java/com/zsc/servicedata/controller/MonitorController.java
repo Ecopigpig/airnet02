@@ -36,7 +36,7 @@ public class MonitorController {
     })
     @RequestMapping(value = "/getMonitorListByUser",method = RequestMethod.POST)
     public ResponseResult getMonitorListByUser(@RequestBody Map<String,Long> map){
-        Long userId = map.get("userId");
+        Long userId = map.get("id");
         ResponseResult result = new ResponseResult();
         result.setMsg(false);
         List<Pollutant> pollutantList = pollutionService.getMonitorListByUser(userId);

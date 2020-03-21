@@ -3,12 +3,10 @@ package com.zsc.servicedata.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zsc.servicedata.entity.data.UserInfo;
-import com.zsc.servicedata.entity.param.AqiHistoryParam;
-import com.zsc.servicedata.entity.param.PageParam;
 import com.zsc.servicedata.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import model.air.HistoryAqiChart;
+import model.page.PageParam;
 import model.result.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.regex.Pattern;
-
-import static io.lettuce.core.ScanArgs.Builder.matches;
 
 @Api(value = "UserController",tags = "用户控制器")
 @RestController

@@ -1,25 +1,19 @@
 package com.zsc.servicehi.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.zsc.servicehi.entity.CityCode;
 import com.zsc.servicehi.utils.GetWeatherData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import model.result.ResponseResult;
-import model.weather.AreaCode;
-import model.weather.InstanceWeather;
-import model.weather.Weather24Hours;
-import model.weather.WeatherIn15Days;
+import model.weather.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -4,7 +4,6 @@ import com.zsc.servicedata.entity.param.AqiHistoryParam;
 import com.zsc.servicedata.entity.param.DetailCityParam;
 import com.zsc.servicedata.service.AirService;
 import com.zsc.servicedata.service.CityService;
-import com.zsc.servicedata.service.PollutionService;
 import com.zsc.servicedata.service.feign.HiFeignService;
 import com.zsc.servicedata.tag.PassToken;
 import io.swagger.annotations.Api;
@@ -14,10 +13,10 @@ import io.swagger.annotations.ApiOperation;
 import model.air.HistoryAqiChart;
 import model.result.ResponseResult;
 import model.weather.AreaCode;
+import model.weather.CityCode;
 import model.weather.InstanceWeather;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -95,7 +94,10 @@ public class CityController {
             }
         }
         //在去用代码查询实时天气
-        InstanceWeather instanceWeather = hiFeignService.getInstanceWeather(areaCode.getAreaCode(),areaCode.getPostalCode());
+        CityCode cityCode = new CityCode();
+        cityCode.setAreaCode(areaCode.getAreaCode());
+        cityCode.setPostalCode(areaCode.getPostalCode());
+        InstanceWeather instanceWeather = hiFeignService.getInstanceWeather(cityCode);
         if(instanceWeather!=null){
             instanceWeather.setCity(city+area);
             result.setMsg(true);

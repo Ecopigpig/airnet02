@@ -3,8 +3,10 @@ package com.zsc.servicedata.service.feign.Impl;
 import com.zsc.servicedata.service.feign.HiFeignService;
 import model.pollutant.MonitorSite;
 import model.weather.AreaCode;
+import model.weather.CityCode;
 import model.weather.InstanceWeather;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,7 @@ public class HiFeignServiceHystrix implements HiFeignService {
     }
 
     @Override
-    public InstanceWeather getInstanceWeather(String areaCode, String postalCode) {
+    public InstanceWeather getInstanceWeather(CityCode cityCode) {
         InstanceWeather instanceWeather = new InstanceWeather();
         return instanceWeather;
     }

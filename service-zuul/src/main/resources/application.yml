@@ -1,14 +1,20 @@
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://root:booszy@39.108.10.105:8761/eureka/
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
 
 server:
-  port: 4534
+  port: 8090
 
 spring:
+  security:
+    basic:
+      enabled: true
+    user:
+      name: root
+      password: booszy
   application:
     name: service-zuul
 
@@ -25,3 +31,16 @@ management:
   endpoint:
     health:
       show-details: always
+
+zuul:
+  host:
+    connect-timeout-millis: 3000
+    socket-timeout-millis: 3000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeout-in-milliseconds: 3000

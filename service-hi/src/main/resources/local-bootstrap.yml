@@ -1,20 +1,19 @@
-#remote
 server:
   port: 8763
 
 spring:
-  security:
-    basic:
-      enabled: true
-    user:
-      name: root
-      password: booszy
+#  security:
+#    basic:
+#      enabled: false
+#    user:
+#      name: root
+#      password: booszy
   cloud:
     discovery:
       client:
         simple:
           local:
-            uri: service-hi  #这个就是@Feign的value值！！！！
+            uri: service-hi
   application:
     name: service-hi #这是显示在注册中心上的名字
   zipkin:
@@ -44,11 +43,10 @@ spring:
 eureka:
   client:
     service-url:   #这个service-url是对的
-#      defaultZone: http://localhost:8761/euraka/  #这个default-Zone是对的
-      defaultZone: http://root:booszy@localhost:8761/eureka/
+      default-Zone: http://localhost:8761/euraka/  #这个default-Zone是对的
+#      defaultZone: http://root:booszy@localhost:8761/eureka/
   instance:
     prefer-ip-address: true
-#    ip-address: 39.108.10.105
     instance-id: ${spring.application.name}:${server.port} #注册的实例名称
     appname: service-hi
 #    instance-id: ${spring.cloud.client.ipAddress}:${server.port} #注册的实例名称

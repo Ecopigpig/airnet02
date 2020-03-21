@@ -12,3 +12,4 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
         super.configure(http);
     }
 }
+//public class WebSecurityConfigurer {}
