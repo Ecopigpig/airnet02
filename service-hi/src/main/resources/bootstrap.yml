@@ -13,7 +13,7 @@ spring:
       client:
         simple:
           local:
-            uri: service-hi  #这个就是@Feign的value值！！！！
+            uri: service-hi
   application:
     name: service-hi #这是显示在注册中心上的名字
   zipkin:

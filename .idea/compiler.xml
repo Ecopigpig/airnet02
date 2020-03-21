@@ -10,6 +10,7 @@
         <module name="service-common" />
         <module name="service-data" />
         <module name="service-hi" />
+        <module name="service-zuul" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
@@ -18,6 +19,7 @@
       <module name="service-data" target="1.8" />
       <module name="service-feign" target="1.8" />
       <module name="service-hi" target="1.8" />
+      <module name="service-zuul" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -26,6 +28,7 @@
       <module name="service-data" options="-parameters" />
       <module name="service-feign" options="-parameters" />
       <module name="service-hi" options="-parameters" />
+      <module name="service-zuul" options="-parameters" />
     </option>
   </component>
 </project>

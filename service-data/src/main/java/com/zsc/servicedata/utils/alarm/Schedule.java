@@ -48,7 +48,7 @@ public class Schedule {
     private MessageService messageService;
 
 
-    @Scheduled(fixedRate = 2000000)
+//    @Scheduled(fixedRate = 2000000)
     public void checkIsAlarm() throws IOException {
         //每隔半小时去获取实时数据，与数据库中用户设定作对比，超过预设值就发邮件
         //先从缓存里头获取全国实时排行榜，从排行榜里头获取所有城市的监测点的浓度
@@ -331,7 +331,7 @@ public class Schedule {
      * 定时记录367个城市的污染情况 和 空气质量情况
      * @throws IOException
      */
-    @Scheduled(fixedRate = 2000000)
+//    @Scheduled(fixedRate = 2000000)
 //    @Scheduled(cron = "0 0 20 * * ?")// 每天下午8点
     public void markPollutantHistory() throws IOException, ParseException {
         String result = hiFeignService.offerNationPollutant();

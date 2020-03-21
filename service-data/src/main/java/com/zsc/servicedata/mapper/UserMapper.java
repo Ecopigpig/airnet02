@@ -26,4 +26,8 @@ public interface UserMapper {
     int updateToken(Long userId, String token);
 
     List<UserInfo> selectAllUsers();
+
+    int insertNewUser(UserInfo param);
+
+    int updateUserInfo(UserInfo userInfo);
 }

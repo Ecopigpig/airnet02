@@ -49,4 +49,14 @@ public class UserServiceImpl implements UserService {
     public List<UserInfo> getAllUsers() {
         return userMapper.selectAllUsers();
     }
+
+    @Override
+    public int addNewUser(UserInfo param) {
+        return userMapper.insertNewUser(param);
+    }
+
+    @Override
+    public int updateUserInfo(UserInfo userInfo) {
+        return userMapper.updateUserInfo(userInfo);
+    }
 }

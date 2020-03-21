@@ -38,5 +38,22 @@ public interface UserService {
      */
     int insertToken(Long userId, String token);
 
+    /**
+     * 管理员后台展示用户列表
+     * @return
+     */
     List<UserInfo> getAllUsers();
+
+    /**
+     * 用户注册
+     * @param param
+     */
+    int addNewUser(UserInfo param);
+
+    /**
+     * 更新用户信息
+     * @param userInfo
+     * @return
+     */
+    int updateUserInfo(UserInfo userInfo);
 }

@@ -51,4 +51,13 @@
     <select id="selectAllUsers" resultType="com.zsc.servicedata.entity.data.UserInfo">
         select * from userInfo
     </select>
+
+
+    <insert id="insertNewUser" parameterType="com.zsc.servicedata.entity.data.UserInfo">
+        insert into userInfo (username,password,email) values (#{username},#{password},#{email})
+    </insert>
+
+    <update id="updateUserInfo" parameterType="com.zsc.servicedata.entity.data.UserInfo">
+        update userInfo set password = #{password},email = #{email},username = #{username} where id = #{id}
+    </update>
 </mapper>
