@@ -19,8 +19,8 @@ spring:
     name: service-zuul
 
 ribbon:
-  ReadTimeout: 60000
-  ConnectTimeout: 60000
+  ReadTimeout: 600000
+  ConnectTimeout: 600000
 
 
 management:
@@ -32,10 +32,32 @@ management:
     health:
       show-details: always
 
+# URL pattern
+# 使用路径方式匹配路由规则。
+# 参数key结构： zuul.routes.customName.path=xxx
+# 用于配置路径匹配规则。
+# 其中customName自定义。通常使用要调用的服务名称，方便后期管理
+# 可使用的通配符有： * ** ?
+# ? 单个字符
+# * 任意多个字符，不包含多级路径
+# ** 任意多个字符，包含多级路径
+#  zuul.routes.eureka-application-service.path=/api/**
+  # 参数key结构： zuul.routes.customName.url=xxx
+  # url用于配置符合path的请求路径路由到的服务地址。
+#  zuul.routes.eureka-application-service.url=http://127.0.0.1:8080/
+
 zuul:
+  routes:
+    service-hi:
+      path: /service-hi/**
+      url: http://39.108.10.105:8763/
+    service-data:
+      path: /service-data/**
+      url: http://116.62.37.59:8708/
+
   host:
-    connect-timeout-millis: 3000
-    socket-timeout-millis: 3000
+    connect-timeout-millis: 600000
+    socket-timeout-millis: 600000
 
 hystrix:
   command:
@@ -43,4 +65,7 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeout-in-milliseconds: 3000
+            timeoutInMilliseconds: 600000
+
+
+
