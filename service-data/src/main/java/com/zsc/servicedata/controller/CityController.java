@@ -1,16 +1,21 @@
 package com.zsc.servicedata.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.zsc.servicedata.entity.data.UserInfo;
 import com.zsc.servicedata.entity.param.AqiHistoryParam;
 import com.zsc.servicedata.entity.param.DetailCityParam;
 import com.zsc.servicedata.service.AirService;
 import com.zsc.servicedata.service.CityService;
 import com.zsc.servicedata.service.feign.HiFeignService;
+import com.zsc.servicedata.tag.MyLog;
 import com.zsc.servicedata.tag.PassToken;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import model.air.HistoryAqiChart;
+import model.page.PageParam;
 import model.result.ResponseResult;
 import model.weather.AreaCode;
 import model.weather.CityCode;
@@ -112,7 +117,7 @@ public class CityController {
         ResponseResult result = new ResponseResult();
         result.setMsg(false);
         //参数校验
-        if(param.getSize()==null||param.getSize()<=0) param.setSize(10L);
+        if(param.getRecordSize()==null||param.getSize()<=0) param.setRecordSize(10L);
         if(param.getOrder()==null||param.getOrder().equals("")){
             param.setOrder("asc");
         }else{
@@ -121,11 +126,14 @@ public class CityController {
             else if(order.equals("DESC")) param.setOrder("DESC");
             else param.setOrder("ASC");
         }
+        int pageIndex = param.getPage()<=0?1:param.getPage();
+        PageHelper.startPage(pageIndex, Math.toIntExact(param.getRecordSize()));
         List<HistoryAqiChart> historyAqiChartList = airService.getAqiHistoryByCondition(param);
+        PageInfo<HistoryAqiChart> pageInfo = new PageInfo<>(historyAqiChartList);
         if(historyAqiChartList.size()>0){
             result.setMsg(true);
-            result.setData(historyAqiChartList);
-            result.setTotal(Long.valueOf(historyAqiChartList.size()));
+            result.setData(pageInfo);
+            result.setTotal(pageInfo.getTotal());
         }
         return result;
     }

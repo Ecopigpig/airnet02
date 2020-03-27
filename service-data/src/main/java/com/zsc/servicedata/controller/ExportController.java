@@ -126,7 +126,7 @@ public class ExportController {
     @RequestMapping(value = "/airHistory",method = RequestMethod.POST)
     public void exportAirHistory(HttpServletResponse response, @RequestBody AqiHistoryParam param) throws IOException, ParseException {
         //参数校验
-        if(param.getSize()==null||param.getSize()<=0) param.setSize(10L);
+        if(param.getRecordSize()==null||param.getSize()<=0) param.setRecordSize(10L);
         if(param.getOrder()==null||param.getOrder().equals("")){
             param.setOrder("asc");
         }else{

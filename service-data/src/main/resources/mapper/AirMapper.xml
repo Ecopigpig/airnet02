@@ -29,7 +29,7 @@
                 AND a.markTime <![CDATA[<=]]>#{endTime}
             </if>
             <if test="size !=null">
-                AND #{size} &gt;
+                AND #{recordSize} &gt;
                 (
                 SELECT COUNT(*) FROM aqihistory WHERE
                 markTime=a.markTime AND `rank` &lt; a.`rank`

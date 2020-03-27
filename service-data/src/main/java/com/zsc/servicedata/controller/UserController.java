@@ -4,6 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zsc.servicedata.entity.data.UserInfo;
 import com.zsc.servicedata.service.UserService;
+import com.zsc.servicedata.tag.MyLog;
+import com.zsc.servicedata.tag.UserLoginToken;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import model.page.PageParam;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Api(value = "UserController",tags = "用户控制器")
@@ -109,5 +112,22 @@ public class UserController {
             }
         }
         return result;
+    }
+
+    /*假装登录，将用户信息存到session（方法是我之前写的懒得改，所以直接取的第一条数据）*/
+    @RequestMapping("/login")
+    public List<UserInfo> login(HttpServletRequest request){
+        List<UserInfo> user = userService.getAllUsers();
+        UserInfo user1 = user.get(0);
+        request.getSession().setAttribute("user",user1);
+        return user;
+    }
+    /*记录日志*/
+    @UserLoginToken
+    @MyLog(operation = "查询用户信息",type = 1)
+    @RequestMapping("/log")
+    public List<UserInfo> insertLog(HttpServletRequest request){
+        List<UserInfo> user = userService.getAllUsers();
+        return user;
     }
 }

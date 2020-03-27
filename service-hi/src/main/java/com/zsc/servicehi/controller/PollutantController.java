@@ -11,6 +11,8 @@ import model.pollutant.MonitorSite;
 import model.pollutant.PollutantCity;
 import model.pollutant.PollutionSite;
 import model.result.ResponseResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -27,6 +29,8 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RequestMapping("/pollutant")
 public class PollutantController {
+
+    private final static Logger logger = LoggerFactory.getLogger(PollutantController.class);
 
     @Autowired
     RedisTemplate redisTemplate;
@@ -49,7 +53,12 @@ public class PollutantController {
         PollutantCity pollutantCity = new PollutantCity();
         String city = paramMap.get("city");
         String key = city + "PollutantSites";
-        JSON json = (JSON) JSON.toJSON(redisTemplate.opsForValue().get(key));
+        JSON json = null;
+        try {
+            json = (JSON) JSON.toJSON(redisTemplate.opsForValue().get(key));
+        }catch (Exception e){
+            logger.error("/pollutant/offerPollutantSites异常:"+e);
+        }
         Object javaObject = JSON.toJavaObject(json, PollutantCity.class);
         if (javaObject == null) {
             //没有缓存就存进去
@@ -77,7 +86,12 @@ public class PollutantController {
     @RequestMapping(value = "/offerSitesWithLocation", method = RequestMethod.POST)
     public List<MonitorSite> offerSitesWithLocation() {
         GetPollutantData getPollutantData = new GetPollutantData();
-        List<MonitorSite> list = getPollutantData.getSitesWithLocation();
+        List<MonitorSite> list = new ArrayList<>();
+        try{
+            list = getPollutantData.getSitesWithLocation();
+        }catch (Exception e){
+            logger.error("/pollutant/offerSitesWithLocation异常:"+e);
+        }
         return list;
     }
 
@@ -86,7 +100,12 @@ public class PollutantController {
     @RequestMapping(value = "/offerNationPollutant", method = RequestMethod.POST)
     public List<PollutantCity> offerNationPollutant() {
         GetPollutantData getPollutantData = new GetPollutantData();
-        List<PollutantCity> pollutantCityList = getPollutantData.getNationPollutantRank();
+        List<PollutantCity> pollutantCityList = new ArrayList<>();
+        try {
+            pollutantCityList = getPollutantData.getNationPollutantRank();
+        }catch (Exception e){
+            logger.error("/pollutant/offerNationPollutant异常:"+e);
+        }
         return pollutantCityList;
     }
 
@@ -101,7 +120,12 @@ public class PollutantController {
         PollutantCity pollutantCity = new PollutantCity();
         String city = map.get("city");
         String key = city + "PollutionSituation";
-        JSON json = (JSON) JSON.toJSON(redisTemplate.opsForValue().get(key));
+        JSON json = null;
+        try{
+            json = (JSON) JSON.toJSON(redisTemplate.opsForValue().get(key));
+        }catch (Exception e){
+            logger.error("/pollutant/getCity异常:",e);
+        }
         Object javaObject = JSON.toJavaObject(json, PollutantCity.class);
         if (javaObject == null) {
             //没有缓存就存进去
@@ -143,12 +167,16 @@ public class PollutantController {
         //每次响应都要去redis看看有没有这个value可以去取
         String key = "NationPollutionSituation";
         Long length = redisTemplate.opsForList().size(key);
-        for (Long i = 0L; i < length; i++) {
-            JSON json = (JSON) JSON.toJSON(redisTemplate.opsForList().index(key, i));
-            Object javaObject = JSON.toJavaObject(json, PollutantCity.class);
-            PollutantCity result = new PollutantCity();
-            BeanUtils.copyProperties(javaObject, result);
-            redisList.add(result);
+        try {
+            for (Long i = 0L; i < length; i++) {
+                JSON json = (JSON) JSON.toJSON(redisTemplate.opsForList().index(key, i));
+                Object javaObject = JSON.toJavaObject(json, PollutantCity.class);
+                PollutantCity result = new PollutantCity();
+                BeanUtils.copyProperties(javaObject, result);
+                redisList.add(result);
+            }
+        }catch (Exception e){
+            logger.error("/pollutant/getNation循环异常:",e);
         }
         if (redisList.size() == 0) {
             //没有缓存就存进去
@@ -166,8 +194,12 @@ public class PollutantController {
         int size = pollutantCityList.size();
         int pageStart = pageIndex == 1 ? 0 : (pageIndex - 1) * pageSize;
         int pageEnd = size < pageIndex * pageSize ? size : pageIndex * pageSize;
-        if (size>pageStart){
-            pageList = pollutantCityList.subList(pageStart,pageEnd);
+        try {
+            if (size > pageStart) {
+                pageList = pollutantCityList.subList(pageStart, pageEnd);
+            }
+        }catch (Exception e){
+            logger.error("/pollutant/getNation分页异常:",e);
         }
         ResponseResult result = new ResponseResult();
         result.setMsg(false);

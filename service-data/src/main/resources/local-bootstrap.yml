@@ -2,12 +2,12 @@ server:
   port: 8708
 
 spring:
-  security:
-    basic:
-      enabled: false
-    user:
-      name: root
-      password: booszy
+#  security:
+#    basic:
+#      enabled: false
+#    user:
+#      name: root
+#      password: booszy
   cloud:
     discovery:
       client:
@@ -82,8 +82,9 @@ eureka:
 #    fetch-registry: true #发现服务
 #    register-with-eureka: false #注册服务
     service-url:    #这个service-url是对的
-      default-Zone: http://localhost:8761/euraka/  #这个default-Zone是对的
-#      defaultZone: http://39.108.10.105:8761/euraka/  #这个default-Zone是对的
+#      default-Zone: http://localhost:8761/euraka/
+      default-one: http://localhost:8761/euraka/
+#      defaultZone: http://39.108.10.105:8761/euraka/
 #      defaultZone: http://root:booszy@39.108.10.105:8761/eureka/
   instance:
     prefer-ip-address: true

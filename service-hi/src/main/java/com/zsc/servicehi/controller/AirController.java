@@ -8,12 +8,15 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import model.air.AirQuality;
 import model.result.ResponseResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.io.BufferedReader;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -22,6 +25,8 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RequestMapping("/air")
 public class AirController {
+
+    private final static Logger logger = LoggerFactory.getLogger(AirController.class);
 
     @Resource
     RedisTemplate redisTemplate;
@@ -34,12 +39,17 @@ public class AirController {
             @ApiImplicitParam(paramType = "query", name = "city", value = "城市名称,一定要带市字", required = true, dataType = "String")
     })
     @RequestMapping(value = "/getAirQuality", method = RequestMethod.POST)
-    public ResponseResult getAirQuality(@RequestBody Map<String, String> map) {
+    public ResponseResult getAirQuality(@RequestBody Map<String, String> map){
         GetAirData airData = new GetAirData();
         AirQuality airQuality = new AirQuality();
         String city = map.get("city");
         String key = city + "AirQuality";
-        JSON json = (JSON) JSON.toJSON(redisTemplate.opsForValue().get(key));
+        JSON json = null;
+        try {
+            json = (JSON) JSON.toJSON(redisTemplate.opsForValue().get(key));
+        }catch (Exception e){
+            logger.error("/air/getAirQuality异常:",e);
+        }
         Object javaObject = JSON.toJavaObject(json, AirQuality.class);
         if (javaObject == null) {
             //没有缓存就存进去

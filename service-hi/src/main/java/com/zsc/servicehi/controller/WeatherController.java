@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import model.result.ResponseResult;
 import model.weather.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.EnableCaching;
@@ -26,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 @EnableCaching
 public class WeatherController {
 
+    private final static Logger logger = LoggerFactory.getLogger(WeatherController.class);
 
     @Autowired
     RedisTemplate redisTemplate;
@@ -41,8 +44,13 @@ public class WeatherController {
     @RequestMapping(value = "/get24HourData",method = {RequestMethod.POST})
     public List<Weather24Hours> get24HourData(@RequestBody Map<String, String> map) {
         GetWeatherData getWeatherData = new GetWeatherData();
+        List<Weather24Hours> weather24HoursList = new ArrayList<>();
         String city = map.get("city");
-        List<Weather24Hours> weather24HoursList = getWeatherData.get24HourWeather(city);
+        try {
+            weather24HoursList = getWeatherData.get24HourWeather(city);
+        }catch (Exception e){
+            logger.error("/weather/get24HourData异常:",e);
+        }
         return weather24HoursList;
     }
 
@@ -55,7 +63,12 @@ public class WeatherController {
     public List<AreaCode> getAreaCode(@RequestBody Map<String, String> map) {
         GetWeatherData getWeatherData = new GetWeatherData();
         String city = map.get("city");
-        List<AreaCode> areaCodeList = getWeatherData.getAreaCode(city);
+        List<AreaCode> areaCodeList = new ArrayList<>();
+        try {
+            areaCodeList = getWeatherData.getAreaCode(city);
+        }catch (Exception e){
+            logger.error("/weather/getAreaCode异常:",e);
+        }
         return areaCodeList;
     }
 
@@ -69,7 +82,12 @@ public class WeatherController {
         String areaCode = cityCode.getAreaCode();
         String postalCode = cityCode.getPostalCode();
         GetWeatherData getWeatherData = new GetWeatherData();
-        InstanceWeather instanceWeather = getWeatherData.getInstanceTimeWeather(areaCode,postalCode);
+        InstanceWeather instanceWeather = new InstanceWeather();
+        try {
+            instanceWeather = getWeatherData.getInstanceTimeWeather(areaCode, postalCode);
+        }catch (Exception e){
+            logger.error("/weather/getInstanceWeather异常:",e);
+        }
         return instanceWeather;
     }
 
@@ -86,12 +104,16 @@ public class WeatherController {
         String city = map.get("city");
         String key = city + "24HourWeather";
         Long length = redisTemplate.opsForList().size(key);
-        for (Long i = 0L; i < length; i++) {
-            JSON json = (JSON) JSON.toJSON(redisTemplate.opsForList().index(key, i));
-            Object javaObject = JSON.toJavaObject(json, Weather24Hours.class);
-            Weather24Hours result = new Weather24Hours();
-            BeanUtils.copyProperties(javaObject, result);
-            redisList.add(result);
+        try {
+            for (Long i = 0L; i < length; i++) {
+                JSON json = (JSON) JSON.toJSON(redisTemplate.opsForList().index(key, i));
+                Object javaObject = JSON.toJavaObject(json, Weather24Hours.class);
+                Weather24Hours result = new Weather24Hours();
+                BeanUtils.copyProperties(javaObject, result);
+                redisList.add(result);
+            }
+        }catch (Exception e){
+            logger.error("/weather/get24Hour循环异常:",e);
         }
         if (redisList.size() == 0) {
             //没有缓存就存进去
@@ -127,12 +149,16 @@ public class WeatherController {
         //每次响应都要去redis看看有没有这个value可以去取
         String key = city + "15DayWeather";
         Long length = redisTemplate.opsForList().size(key);
-        for (Long i = 0L; i < length; i++) {
-            JSON json = (JSON) JSON.toJSON(redisTemplate.opsForList().index(key, i));
-            Object javaObject = JSON.toJavaObject(json, WeatherIn15Days.class);
-            WeatherIn15Days result = new WeatherIn15Days();
-            BeanUtils.copyProperties(javaObject, result);
-            redisList.add(result);
+        try {
+            for (Long i = 0L; i < length; i++) {
+                JSON json = (JSON) JSON.toJSON(redisTemplate.opsForList().index(key, i));
+                Object javaObject = JSON.toJavaObject(json, WeatherIn15Days.class);
+                WeatherIn15Days result = new WeatherIn15Days();
+                BeanUtils.copyProperties(javaObject, result);
+                redisList.add(result);
+            }
+        }catch (Exception e){
+            logger.error("/weather/getIn15Days循环异常",e);
         }
         if (redisList.size() == 0) {
             //没有缓存就存进去
