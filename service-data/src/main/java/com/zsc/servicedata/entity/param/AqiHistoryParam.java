@@ -24,4 +24,7 @@ public class AqiHistoryParam extends PageParam implements Serializable {
 
     @ApiModelProperty(value = "查询结束时间")
     private String endTime;
+
+    @ApiModelProperty(value = "空气质量筛选")
+    private String quality;
 }

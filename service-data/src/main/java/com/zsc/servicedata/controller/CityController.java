@@ -117,7 +117,7 @@ public class CityController {
         ResponseResult result = new ResponseResult();
         result.setMsg(false);
         //参数校验
-        if(param.getRecordSize()==null||param.getSize()<=0) param.setRecordSize(10L);
+        if(param.getRecordSize()==null||param.getRecordSize()<=0) param.setRecordSize(10L);
         if(param.getOrder()==null||param.getOrder().equals("")){
             param.setOrder("asc");
         }else{

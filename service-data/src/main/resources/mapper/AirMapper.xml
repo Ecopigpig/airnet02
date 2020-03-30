@@ -33,6 +33,9 @@
                 (
                 SELECT COUNT(*) FROM aqihistory WHERE
                 markTime=a.markTime AND `rank` &lt; a.`rank`
+                <if test="quality !=null">
+                    AND quality = #{quality}
+                </if>
                 )
                 <if test="order=='ASC'.toString()">
                     ORDER BY

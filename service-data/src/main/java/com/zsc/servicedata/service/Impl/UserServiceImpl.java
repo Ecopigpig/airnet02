@@ -59,4 +59,9 @@ public class UserServiceImpl implements UserService {
     public int updateUserInfo(UserInfo userInfo) {
         return userMapper.updateUserInfo(userInfo);
     }
+
+    @Override
+    public Map<Long, UserInfo> getUserByIdList(List<Long> userIdList) {
+        return userMapper.selectUserMapByIdList(userIdList);
+    }
 }

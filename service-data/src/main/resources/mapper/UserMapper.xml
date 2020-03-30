@@ -60,4 +60,12 @@
     <update id="updateUserInfo" parameterType="com.zsc.servicedata.entity.data.UserInfo">
         update userInfo set password = #{password},email = #{email},username = #{username} where id = #{id}
     </update>
+
+    <select id="selectUserMapByIdList" resultMap="userInfoMap">
+        SELECT * FROM userInfo WHERE id in(
+        <foreach collection="list" item="item" index="index" separator=",">
+            #{item}
+        </foreach>
+        )
+    </select>
 </mapper>

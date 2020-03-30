@@ -30,4 +30,7 @@ public interface UserMapper {
     int insertNewUser(UserInfo param);
 
     int updateUserInfo(UserInfo userInfo);
+
+    @MapKey("id")
+    Map<Long, UserInfo> selectUserMapByIdList(@Param("list") List<Long> userIdList);
 }

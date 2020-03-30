@@ -56,4 +56,6 @@ public interface UserService {
      * @return
      */
     int updateUserInfo(UserInfo userInfo);
+
+    Map<Long, UserInfo> getUserByIdList(List<Long> userIdList);
 }
