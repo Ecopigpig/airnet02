@@ -140,7 +140,7 @@ public class PollutantController {
         result.setMsg(false);
         if (pollutantCity != null) {
             result.setMsg(true);
-            if(pollutantCity.getPollutionSiteList().size()==0){
+            if(pollutantCity.getPollutionSiteList()==null){
                 result.setTotal(0L);
             }else {
                 result.setTotal(Long.valueOf(pollutantCity.getPollutionSiteList().size()));

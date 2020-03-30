@@ -114,7 +114,7 @@ public class UserController {
         return result;
     }
 
-    /*假装登录，将用户信息存到session（方法是我之前写的懒得改，所以直接取的第一条数据）*/
+    /*假装登录，将用户信息存到session*/
     @RequestMapping("/login")
     public List<UserInfo> login(HttpServletRequest request){
         List<UserInfo> user = userService.getAllUsers();

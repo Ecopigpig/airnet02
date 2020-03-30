@@ -2,27 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa68a333-fe5e-40f3-82db-98b77398e78d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/service-common/src/main/java/model/log/Operation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/config/MyConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/config/SysLogAspect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/mapper/MyLogMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/tag/MyLog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-data/src/main/resources/mapper/MyLogMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-hi/src/main/java/com/zsc/servicehi/config/MyConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service-common/target/classes/model/log/Operation.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/CityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/CityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/ExportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/ExportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-common/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/service-common/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-common/target/service-common-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/service-common/target/service-common-1.0-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/entity/param/AqiHistoryParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/entity/param/AqiHistoryParam.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/utils/alarm/Schedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/utils/alarm/Schedule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service-data/src/main/resources/bootstrap.yml" beforeDir="false" afterPath="$PROJECT_DIR$/service-data/src/main/resources/bootstrap.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service-data/src/main/resources/local-bootstrap.yml" beforeDir="false" afterPath="$PROJECT_DIR$/service-data/src/main/resources/local-bootstrap.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service-data/src/main/resources/mapper/AirMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/service-data/src/main/resources/mapper/AirMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service-hi/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/service-hi/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service-hi/src/main/java/com/zsc/servicehi/controller/AirController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service-hi/src/main/java/com/zsc/servicehi/controller/AirController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service-hi/src/main/java/com/zsc/servicehi/controller/PollutantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service-hi/src/main/java/com/zsc/servicehi/controller/PollutantController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service-hi/src/main/java/com/zsc/servicehi/controller/WeatherController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service-hi/src/main/java/com/zsc/servicehi/controller/WeatherController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service-hi/src/main/resources/bootstrap.yml" beforeDir="false" afterPath="$PROJECT_DIR$/service-hi/src/main/resources/bootstrap.yml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/service-common/target/" />
     <ignored path="$PROJECT_DIR$/eureka-server/target/" />
@@ -56,10 +41,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/UserController.java">
+        <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/config/SysLogAspect.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="417">
-              <caret line="129" selection-start-line="129" selection-end-line="129" />
+            <state relative-caret-position="1320">
+              <caret line="83" column="69" selection-start-line="83" selection-start-column="69" selection-end-line="83" selection-end-column="69" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -68,28 +53,46 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/service-hi/src/main/resources/bootstrap.yml">
+        <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/CityController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="40" column="60" lean-forward="true" selection-start-line="38" selection-start-column="2" selection-end-line="40" selection-end-column="60" />
+            <state relative-caret-position="939">
+              <caret line="138" column="5" selection-start-line="138" selection-start-column="5" selection-end-line="138" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/service-data/src/main/resources/bootstrap.yml">
+        <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
+            <state relative-caret-position="376">
+              <caret line="125" column="4" lean-forward="true" selection-start-line="125" selection-start-column="4" selection-end-line="126" selection-end-column="41" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/ApiController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-18">
+              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/ExportController.java">
+        <entry file="file://$PROJECT_DIR$/service-hi/src/main/java/com/zsc/servicehi/controller/PollutantController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="128" column="80" selection-start-line="128" selection-start-column="80" selection-end-line="128" selection-end-column="80" />
+            <state relative-caret-position="280">
+              <caret line="142" column="57" selection-start-line="142" selection-start-column="57" selection-end-line="142" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -107,8 +110,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>offerNationPollutant</find>
-      <find>Loadbalancer</find>
       <find>restte</find>
       <find>resttemplate</find>
       <find>Load balancer</find>
@@ -124,7 +125,6 @@
       <find>swagger</find>
       <find>token</find>
       <find>监测</find>
-      <find>web</find>
       <find>foreach</find>
       <find>PageParam</find>
       <find>test</find>
@@ -137,6 +137,9 @@
       <find>eure</find>
       <find>re</find>
       <find>operationService</find>
+      <find>mysql</find>
+      <find>web</find>
+      <find>page</find>
     </findStrings>
     <dirStrings>
       <dir>F:\#########AAAAAAAAAAAA\how2j-springcloud\get20200312\service-data</dir>
@@ -177,12 +180,10 @@
         <option value="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/MonitorController.java" />
         <option value="$PROJECT_DIR$/service-zuul/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/service-common/src/main/java/model/exception/BusinessException.java" />
-        <option value="$PROJECT_DIR$/service-hi/src/main/java/com/zsc/servicehi/controller/PollutantController.java" />
         <option value="$PROJECT_DIR$/service-hi/src/main/java/com/zsc/servicehi/controller/WeatherController.java" />
         <option value="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/utils/alarm/Schedule.java" />
         <option value="$PROJECT_DIR$/service-hi/src/main/java/com/zsc/servicehi/controller/AirController.java" />
         <option value="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/ExportController.java" />
-        <option value="$PROJECT_DIR$/service-data/pom.xml" />
         <option value="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/entity/param/AqiHistoryParam.java" />
         <option value="$PROJECT_DIR$/service-data/src/main/resources/mapper/AirMapper.xml" />
         <option value="$PROJECT_DIR$/service-hi/src/main/java/com/zsc/servicehi/config/WebLogDetailAspect.java" />
@@ -196,7 +197,6 @@
         <option value="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/CityController.java" />
         <option value="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/mapper/MyLogMapper.java" />
         <option value="$PROJECT_DIR$/service-data/src/main/resources/mapper/MyLogMapper" />
-        <option value="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/UserController.java" />
         <option value="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/config/SysLogAspect.java" />
         <option value="$PROJECT_DIR$/service-hi/src/main/java/com/zsc/servicehi/config/MyConfiguration.java" />
         <option value="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/config/MyConfiguration.java" />
@@ -205,6 +205,9 @@
         <option value="$PROJECT_DIR$/service-hi/src/main/resources/local-bootstrap.yml" />
         <option value="$PROJECT_DIR$/service-hi/src/main/resources/bootstrap.yml" />
         <option value="$PROJECT_DIR$/service-data/src/main/resources/bootstrap.yml" />
+        <option value="$PROJECT_DIR$/service-data/pom.xml" />
+        <option value="$PROJECT_DIR$/service-hi/src/main/java/com/zsc/servicehi/controller/PollutantController.java" />
+        <option value="$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/UserController.java" />
       </list>
     </option>
   </component>
@@ -222,11 +225,11 @@
       <expand>
         <path>
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="service-data" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="service-hi" type="9519ce18:MavenProjectsStructure$ProjectNode" />
         </path>
         <path>
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="service-data" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="service-hi" type="9519ce18:MavenProjectsStructure$ProjectNode" />
           <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
         </path>
       </expand>
@@ -248,64 +251,82 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="get20200312" type="b2602c69:ProjectViewProjectNode" />
-              <item name="service-data" type="462c0819:PsiDirectoryNode" />
+              <item name="service-hi" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="get20200312" type="b2602c69:ProjectViewProjectNode" />
-              <item name="service-data" type="462c0819:PsiDirectoryNode" />
+              <item name="service-hi" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="get20200312" type="b2602c69:ProjectViewProjectNode" />
-              <item name="service-data" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="get20200312" type="b2602c69:ProjectViewProjectNode" />
-              <item name="service-data" type="462c0819:PsiDirectoryNode" />
+              <item name="service-hi" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="get20200312" type="b2602c69:ProjectViewProjectNode" />
-              <item name="service-data" type="462c0819:PsiDirectoryNode" />
+              <item name="service-hi" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="get20200312" type="b2602c69:ProjectViewProjectNode" />
-              <item name="service-data" type="462c0819:PsiDirectoryNode" />
+              <item name="service-hi" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="zsc" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="get20200312" type="b2602c69:ProjectViewProjectNode" />
-              <item name="service-data" type="462c0819:PsiDirectoryNode" />
+              <item name="service-hi" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="zsc" type="462c0819:PsiDirectoryNode" />
-              <item name="servicedata" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="get20200312" type="b2602c69:ProjectViewProjectNode" />
+              <item name="service-hi" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="zsc" type="462c0819:PsiDirectoryNode" />
+              <item name="servicehi" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="get20200312" type="b2602c69:ProjectViewProjectNode" />
+              <item name="service-hi" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="zsc" type="462c0819:PsiDirectoryNode" />
+              <item name="servicehi" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="get20200312" type="b2602c69:ProjectViewProjectNode" />
+              <item name="service-hi" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -316,7 +337,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1585300807460" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1585550893827" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -472,7 +493,11 @@
       <workItem from="1585132998051" duration="610000" />
       <workItem from="1585141952489" duration="5981000" />
       <workItem from="1585191095118" duration="15554000" />
-      <workItem from="1585297243313" duration="3376000" />
+      <workItem from="1585297243313" duration="3657000" />
+      <workItem from="1585304482179" duration="3154000" />
+      <workItem from="1585369541143" duration="1571000" />
+      <workItem from="1585461079681" duration="1322000" />
+      <workItem from="1585549771514" duration="1121000" />
     </task>
     <task id="LOCAL-00001" summary="本地完成服务间调用">
       <created>1584174057864</created>
@@ -558,16 +583,24 @@
       <option name="project" value="LOCAL" />
       <updated>1584868246271</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="跨域上服务器,分页获取空气质量排行榜已解决,但是日志管理只做了data模块,尚未完整">
+      <created>1585300925102</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1585300925102</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="230044000" />
+    <option name="totallyTimeSpent" value="237493000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49812734" visible="true" weight="0.20509383" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49812734" visible="true" weight="0.20576407" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -577,15 +610,15 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932975" visible="true" weight="0.24645892" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932975" weight="0.25212464" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49932975" weight="0.28470254" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.04249292" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="8" visible="true" weight="0.3937677" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.5141643" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.70579916" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50067025" side_tool="true" weight="0.6373938" />
       <window_info anchor="bottom" id="Spring" order="12" weight="0.3286119" />
       <window_info anchor="bottom" id="Java Enterprise" order="13" weight="0.398017" />
@@ -595,7 +628,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Theme Preview" order="4" />
-      <window_info anchor="right" id="Maven" order="5" weight="0.19906166" />
+      <window_info anchor="right" id="Maven" order="5" weight="0.2808311" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Database" order="8" weight="0.3297587" />
@@ -693,7 +726,8 @@
     <MESSAGE value="websocket和站内信相关接口已完成" />
     <MESSAGE value="接口已大体完成，这是服务器版本" />
     <MESSAGE value="zuul服务器版本已完成,先提交" />
-    <option name="LAST_COMMIT_MESSAGE" value="zuul服务器版本已完成,先提交" />
+    <MESSAGE value="跨域上服务器,分页获取空气质量排行榜已解决,但是日志管理只做了data模块,尚未完整" />
+    <option name="LAST_COMMIT_MESSAGE" value="跨域上服务器,分页获取空气质量排行榜已解决,但是日志管理只做了data模块,尚未完整" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -778,30 +812,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/ApiController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1296">
-          <caret line="57" column="17" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/service/UserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="891">
-          <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/MonitorController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="38" column="32" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/service-zuul/src/main/java/com/zsc/servicezuul/ServiceZuulApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -828,13 +838,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service-hi/src/main/java/com/zsc/servicehi/controller/PollutantController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="32" column="92" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="92" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/service-hi/src/main/java/com/zsc/servicehi/controller/WeatherController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3807">
@@ -852,13 +855,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/utils/alarm/Schedule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-531">
-          <caret line="34" selection-start-line="34" selection-end-line="35" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eureka-server/src/main/resources/local-bootstrap.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-438" />
@@ -872,8 +868,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/service-common/pom.xml">
-      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
       <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
     </entry>
     <entry file="file://$PROJECT_DIR$/service-common/src/main/java/model/page/PageParam.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -903,20 +899,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/service/Impl/AirServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/service/AirService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="13" column="26" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/service-common/src/main/java/model/log/Operation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -941,26 +923,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/CityController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="138" column="5" selection-start-line="138" selection-start-column="5" selection-end-line="138" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/service-hi/src/main/java/com/zsc/servicehi/tag/MyLog.java" />
     <entry file="file://$PROJECT_DIR$/service-hi/src/main/java/com/zsc/servicehi/config/SysLogAspect.java" />
-    <entry file="file://$PROJECT_DIR$/service-data/pom.xml">
-      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="48" column="20" selection-start-line="48" selection-start-column="20" selection-end-line="48" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/mapper/MessageMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -1003,16 +967,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/config/SysLogAspect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1674">
-          <caret line="83" column="69" selection-start-line="83" selection-start-column="69" selection-end-line="83" selection-end-column="69" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/utils/token/TokenUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
@@ -1037,13 +991,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/LoginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-352">
-          <caret line="63" column="34" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/service-hi/src/main/java/com/zsc/servicehi/config/MyConfiguration.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -1054,9 +1001,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/config/MyConfiguration.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/service-zuul/src/main/resources/application.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="9">
@@ -1065,12 +1009,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/eureka-server/pom.xml">
-      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="146">
           <caret line="42" selection-start-line="42" selection-end-line="50" selection-end-column="21" />
         </state>
       </provider>
+      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
     </entry>
     <entry file="file://$PROJECT_DIR$/eureka-server/src/main/java/com/zsc/eurekaserver/config/WebSecurityConfigurer.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1083,12 +1027,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/service-hi/pom.xml">
-      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="174" column="21" selection-start-line="174" selection-start-column="21" selection-end-line="174" selection-end-column="21" />
         </state>
       </provider>
+      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
     </entry>
     <entry file="file://$PROJECT_DIR$/eureka-server/src/main/resources/bootstrap.yml">
       <provider selected="true" editor-type-id="text-editor" />
@@ -1109,32 +1053,126 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/service-hi/src/main/resources/bootstrap.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="40" column="60" lean-forward="true" selection-start-line="38" selection-start-column="2" selection-end-line="40" selection-end-column="60" />
+        <state relative-caret-position="1080">
+          <caret line="40" column="60" selection-start-line="38" selection-start-column="2" selection-end-line="40" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/ExportController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2727">
+          <caret line="128" column="80" selection-start-line="128" selection-start-column="80" selection-end-line="128" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/config/MyConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/service-data/src/main/resources/bootstrap.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
+        <state relative-caret-position="594">
+          <caret line="22" column="35" selection-start-line="1" selection-end-line="22" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/UserController.java">
+    <entry file="file://$PROJECT_DIR$/service-data/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="129" selection-start-line="129" selection-end-line="129" />
+        <state relative-caret-position="2781">
+          <caret line="103" column="21" selection-start-line="94" selection-start-column="8" selection-end-line="103" selection-end-column="21" />
+        </state>
+      </provider>
+      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="20" selection-start-line="20" selection-end-line="21" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/service/AirService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="13" column="26" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/service/Impl/AirServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/utils/alarm/Schedule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="47">
+          <caret line="34" selection-start-line="34" selection-end-line="35" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/service/MessageService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/ServiceDataApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="28" column="15" selection-start-line="26" selection-start-column="10" selection-end-line="28" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/config/SysLogAspect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1320">
+          <caret line="83" column="69" selection-start-line="83" selection-start-column="69" selection-end-line="83" selection-end-column="69" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/ExportController.java">
+    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/CityController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="128" column="80" selection-start-line="128" selection-start-column="80" selection-end-line="128" selection-end-column="80" />
+        <state relative-caret-position="939">
+          <caret line="138" column="5" selection-start-line="138" selection-start-column="5" selection-end-line="138" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="125" column="4" lean-forward="true" selection-start-line="125" selection-start-column="4" selection-end-line="126" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service-data/src/main/java/com/zsc/servicedata/controller/ApiController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-18">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service-hi/src/main/java/com/zsc/servicehi/controller/PollutantController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="142" column="57" selection-start-line="142" selection-start-column="57" selection-end-line="142" selection-end-column="57" />
         </state>
       </provider>
     </entry>
