@@ -1,6 +1,6 @@
 #remote
 server:
-  port: 8761
+  port: 8764
 
 spring:
   security:
@@ -29,7 +29,7 @@ eureka:
 #    service-url:
 #      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
     service-url:
-      default-zone: http://root:booszy@localhost:8761/eureka/
+      default-zone: http://root:booszy@localhost:8764/eureka/
   server:
     enable-self-preservation: false
     eviction-interval-timer-in-ms: 5000

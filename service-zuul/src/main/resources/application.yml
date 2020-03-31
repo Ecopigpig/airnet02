@@ -1,7 +1,7 @@
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://root:booszy@39.108.10.105:8761/eureka/
+      defaultZone: http://root:booszy@101.200.159.233:8764/eureka/
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
 

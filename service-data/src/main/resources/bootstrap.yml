@@ -75,7 +75,8 @@ spring:
 eureka:
   client:
     service-url:   #这个service-url是对的
-      defaultZone: http://root:booszy@39.108.10.105:8761/eureka/  #放在101.200.159.233服务器上
+      defaultZone: http://root:booszy@101.200.159.233:8764/eureka/  #放在101.200.159.233服务器上
+#      defaultZone: http://root:booszy@39.108.10.105:8761/eureka/  #放在101.200.159.233服务器上
   instance:
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${server.port} #注册的实例名称
