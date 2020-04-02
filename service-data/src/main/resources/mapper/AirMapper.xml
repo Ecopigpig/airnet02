@@ -16,12 +16,9 @@
     <!--将 < 号换成  &lt;
          > 号 换成&gt; -->
     <!--在if的test中，直接使用参数名，不用加#{}-->
-    <select id="selectAqiHistoryByParam" resultMap="AqiHistoryMap" parameterType="com.zsc.servicedata.entity.param.AqiHistoryParam">
+    <select id="selectAqiHistoryByRank" resultMap="AqiHistoryMap" parameterType="com.zsc.servicedata.entity.param.AqiHistoryParam">
         SELECT * FROM aqihistory a
         <where>
-            <!--<if test="#{startTime} != null and #{endTime} != null ">-->
-                <!--AND a.markTime BETWEEN #{startTime} AND #{endTime}-->
-            <!--</if>-->
             <if test="startTime != null">
                 AND a.markTime <![CDATA[>=]]> #{startTime}
             </if>
@@ -33,9 +30,6 @@
                 (
                 SELECT COUNT(*) FROM aqihistory WHERE
                 markTime=a.markTime AND `rank` &lt; a.`rank`
-                <if test="quality !=null">
-                    AND quality = #{quality}
-                </if>
                 )
                 <if test="order=='ASC'.toString()">
                     ORDER BY
@@ -50,6 +44,29 @@
     </select>
 
 
+    <select id="selectAqiHistoryByPollution" resultMap="AqiHistoryMap" parameterType="com.zsc.servicedata.entity.param.AqiHistoryParam">
+        SELECT * FROM aqihistory
+        <where>
+            <if test="quality !=null">
+                AND quality = #{quality}
+            </if>
+            <if test="startTime != null">
+                AND markTime <![CDATA[>=]]> #{startTime}
+            </if>
+            <if test="endTime != null">
+                AND markTime <![CDATA[<=]]>#{endTime}
+            </if>
+            <if test="order=='ASC'.toString()">
+                ORDER BY
+                markTime,`rank` ASC
+            </if>
+            <if test="order=='DESC'.toString()">
+                ORDER BY
+                markTime,`rank` DESC
+            </if>
+
+        </where>
+    </select>
 
 
 

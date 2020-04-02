@@ -11,5 +11,8 @@ import java.util.List;
  */
 @Service
 public interface AirService {
-    List<HistoryAqiChart> getAqiHistoryByCondition(AqiHistoryParam param);
+
+    List<HistoryAqiChart> getAqiHistoryByRank(AqiHistoryParam param);
+
+    List<HistoryAqiChart> getAqiHistoryByPollution(AqiHistoryParam param);
 }

@@ -17,4 +17,5 @@ public class ApplyRecord implements Serializable {
     private String reason;
     private Date applyTime;
     private String mail;
+    private Integer auth;
 }

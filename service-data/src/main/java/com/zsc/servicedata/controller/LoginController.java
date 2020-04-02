@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.zsc.servicedata.entity.data.UserInfo;
 import com.zsc.servicedata.service.TokenService;
 import com.zsc.servicedata.service.UserService;
+import com.zsc.servicedata.tag.MyLog;
 import com.zsc.servicedata.tag.UserLoginToken;
 import com.zsc.servicedata.utils.token.TokenUtil;
 import io.swagger.annotations.Api;
@@ -33,7 +34,6 @@ public class LoginController {
 
     @Autowired
     StringRedisTemplate stringRedisTemplate;
-
 
     @ApiOperation(value = "用户登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -88,18 +88,18 @@ public class LoginController {
 
 
 
-    /***
-     * 这个请求需要验证token才能访问
-     *
-     * @author: MRC
-     * @date 2019年5月27日 下午5:45:19
-     * @return String 返回类型
-     */
-    @UserLoginToken
-    @GetMapping("/getMessage")
-    public String getMessage() {
-        // 取出token中带的用户id 进行操作
-        System.out.println(TokenUtil.getTokenUserId());
-        return "你已通过验证";
-    }
+//    /***
+//     * 这个请求需要验证token才能访问
+//     *
+//     * @author: MRC
+//     * @date 2019年5月27日 下午5:45:19
+//     * @return String 返回类型
+//     */
+//    @UserLoginToken
+//    @GetMapping("/getMessage")
+//    public String getMessage() {
+//        // 取出token中带的用户id 进行操作
+//        System.out.println(TokenUtil.getTokenUserId());
+//        return "你已通过验证";
+//    }
 }

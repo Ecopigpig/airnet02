@@ -12,5 +12,5 @@ public interface ApiMapper {
 
     List<ApplyRecord> selectAllApiRecords();
 
-    int updateAuthStatus(@Param("list") List<Long> userIdList);
+    int updateAuthStatus(@Param("list") List<Long> userIdList,@Param("auth")Integer auth);
 }

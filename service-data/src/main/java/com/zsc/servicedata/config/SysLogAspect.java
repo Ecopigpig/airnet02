@@ -78,8 +78,6 @@ public class SysLogAspect {
         String ip = request.getRemoteAddr();
         adminLog.setLoginIp(ip);
         // 操作人账号、姓名（需要提前将用户信息存到session）
-//        UserInfo user = (UserInfo) request.getSession().getAttribute("user");
-//        String token = request.getHeader("token");// 从 http 请求头中取出 token
         String userId = TokenUtil.getTokenUserId();
         UserInfo user = userService.getUserById(Long.valueOf(userId));
         if(user != null) {

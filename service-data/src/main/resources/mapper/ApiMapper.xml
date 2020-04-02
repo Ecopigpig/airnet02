@@ -10,11 +10,11 @@
     </insert>
 
     <select id="selectAllApiRecords" resultType="com.zsc.servicedata.entity.data.ApplyRecord">
-        SELECT * FROM applyrecord
+        SELECT * FROM applyrecord ORDER BY createTime DESC
     </select>
     
     <update id="updateAuthStatus">
-        UPDATE userInfo SET auth = 1 WHERE id in(
+        UPDATE userInfo SET auth = #{auth} WHERE id in(
         <foreach collection="list" index="index" item="item" separator=",">
             #{item}
         </foreach>

@@ -3,6 +3,8 @@ package com.zsc.servicedata.controller;
 import com.zsc.servicedata.entity.param.AqiHistoryParam;
 import com.zsc.servicedata.service.AirService;
 import com.zsc.servicedata.service.PollutionService;
+import com.zsc.servicedata.tag.MyLog;
+import com.zsc.servicedata.tag.UserLoginToken;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import model.air.HistoryAqiChart;
@@ -40,7 +42,8 @@ public class ExportController {
     @Resource
     private AirService airService;
 
-    //尝试excel的导出
+    @UserLoginToken
+    @MyLog(operation = "导出全国的历史污染情况",type = 1)
     @ApiOperation(value = "导出全国的历史污染情况")
     @RequestMapping(value = "/pollutantHistory",method = RequestMethod.POST)
     public void exportPollutantHistory(HttpServletResponse response) throws IOException{
@@ -122,6 +125,8 @@ public class ExportController {
         os.close();
     }
 
+    @UserLoginToken
+    @MyLog(operation = "按条件导出空气质量历史排行榜",type = 1)
     @ApiOperation(value = "按条件导出空气质量历史排行榜")
     @RequestMapping(value = "/airHistory",method = RequestMethod.POST)
     public void exportAirHistory(HttpServletResponse response, @RequestBody AqiHistoryParam param) throws IOException, ParseException {
@@ -135,7 +140,7 @@ public class ExportController {
             else if(order.equals("DESC")) param.setOrder("DESC");
             else param.setOrder("ASC");
         }
-        List<HistoryAqiChart> historyAqiChartList = airService.getAqiHistoryByCondition(param);
+        List<HistoryAqiChart> historyAqiChartList = airService.getAqiHistoryByRank(param);
 
         HSSFWorkbook wb = new HSSFWorkbook();
 

@@ -16,7 +16,12 @@ public class AirServiceImpl implements AirService {
     private AirMapper airMapper;
 
     @Override
-    public List<HistoryAqiChart> getAqiHistoryByCondition(AqiHistoryParam param) {
-        return airMapper.selectAqiHistoryByParam(param);
+    public List<HistoryAqiChart> getAqiHistoryByRank(AqiHistoryParam param) {
+        return airMapper.selectAqiHistoryByRank(param);
+    }
+
+    @Override
+    public List<HistoryAqiChart> getAqiHistoryByPollution(AqiHistoryParam param) {
+        return airMapper.selectAqiHistoryByPollution(param);
     }
 }

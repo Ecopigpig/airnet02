@@ -6,6 +6,7 @@ import com.zsc.servicedata.entity.data.UserInfo;
 import com.zsc.servicedata.service.UserService;
 import com.zsc.servicedata.tag.MyLog;
 import com.zsc.servicedata.tag.UserLoginToken;
+import com.zsc.servicedata.utils.token.TokenUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import model.page.PageParam;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Api(value = "UserController",tags = "用户控制器")
@@ -66,6 +66,8 @@ public class UserController {
         return result;
     }
 
+    @UserLoginToken
+    @MyLog(operation = "用户列表显示",type = 1)
     @ApiOperation(value = "用户列表显示")
     @RequestMapping(value = "/listAllUsers", method = RequestMethod.POST)
     public ResponseResult listAllUsers(@RequestBody PageParam pageParam) {
@@ -83,6 +85,8 @@ public class UserController {
         return result;
     }
 
+    @UserLoginToken
+    @MyLog(operation = "用户修改个人资料",type = 2)
     @ApiOperation(value = "用户修改个人资料")
     @RequestMapping(value = "/modifyUserInfo", method = RequestMethod.POST)
     public ResponseResult listAllUsers(@RequestBody UserInfo userInfo) {
@@ -114,20 +118,22 @@ public class UserController {
         return result;
     }
 
-    /*假装登录，将用户信息存到session*/
-    @RequestMapping("/login")
-    public List<UserInfo> login(HttpServletRequest request){
-        List<UserInfo> user = userService.getAllUsers();
-        UserInfo user1 = user.get(0);
-        request.getSession().setAttribute("user",user1);
-        return user;
-    }
-    /*记录日志*/
-    @UserLoginToken
-    @MyLog(operation = "查询用户信息",type = 1)
-    @RequestMapping("/log")
-    public List<UserInfo> insertLog(HttpServletRequest request){
-        List<UserInfo> user = userService.getAllUsers();
-        return user;
-    }
+//    /*假装登录，将用户信息存到session*/
+//    @RequestMapping("/login")
+//    public List<UserInfo> login(HttpServletRequest request){
+//        List<UserInfo> user = userService.getAllUsers();
+//        UserInfo user1 = user.get(0);
+//        request.getSession().setAttribute("user",user1);
+//        return user;
+//    }
+//    /*记录日志*/
+//    @UserLoginToken
+//    @MyLog(operation = "查询用户信息",type = 1)
+//    @RequestMapping("/log")
+//    public List<UserInfo> insertLog(){
+//        String userId = TokenUtil.getTokenUserId();
+//        System.out.println(userId);
+//        List<UserInfo> user = userService.getAllUsers();
+//        return user;
+//    }
 }

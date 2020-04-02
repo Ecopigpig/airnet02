@@ -8,5 +8,8 @@ import java.util.List;
 
 @Component
 public interface AirMapper {
-    List<HistoryAqiChart> selectAqiHistoryByParam(AqiHistoryParam param);
+
+    List<HistoryAqiChart> selectAqiHistoryByRank(AqiHistoryParam param);
+
+    List<HistoryAqiChart> selectAqiHistoryByPollution(AqiHistoryParam param);
 }

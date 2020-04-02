@@ -2,7 +2,6 @@ package com.zsc.servicedata.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.zsc.servicedata.entity.data.UserInfo;
 import com.zsc.servicedata.entity.param.AqiHistoryParam;
 import com.zsc.servicedata.entity.param.DetailCityParam;
 import com.zsc.servicedata.service.AirService;
@@ -10,12 +9,12 @@ import com.zsc.servicedata.service.CityService;
 import com.zsc.servicedata.service.feign.HiFeignService;
 import com.zsc.servicedata.tag.MyLog;
 import com.zsc.servicedata.tag.PassToken;
+import com.zsc.servicedata.tag.UserLoginToken;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import model.air.HistoryAqiChart;
-import model.page.PageParam;
 import model.result.ResponseResult;
 import model.weather.AreaCode;
 import model.weather.CityCode;
@@ -41,7 +40,6 @@ public class CityController {
     @Autowired
     private HiFeignService hiFeignService;
 
-    @PassToken
     @ApiOperation(value = "通过城市名称获取其对应的实时天气areaCode")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "city", value = "所在市名,不必带市字", required = true, dataType = "String"),
@@ -111,9 +109,9 @@ public class CityController {
         return result;
     }
 
-    @ApiOperation(value = "按条件获取空气质量历史排行榜")
-    @RequestMapping(value = "/airQualityHistoryChart", method = RequestMethod.POST)
-    public ResponseResult airQualityHistoryChart(@RequestBody AqiHistoryParam param) {
+    @ApiOperation(value = "按排名前n获取空气质量历史排行榜")
+    @RequestMapping(value = "/getAQHistoryChartByRank", method = RequestMethod.POST)
+    public ResponseResult getAQHistoryChartByRank(@RequestBody AqiHistoryParam param) {
         ResponseResult result = new ResponseResult();
         result.setMsg(false);
         //参数校验
@@ -128,7 +126,7 @@ public class CityController {
         }
         int pageIndex = param.getPage()<=0?1:param.getPage();
         PageHelper.startPage(pageIndex, Math.toIntExact(param.getRecordSize()));
-        List<HistoryAqiChart> historyAqiChartList = airService.getAqiHistoryByCondition(param);
+        List<HistoryAqiChart> historyAqiChartList = airService.getAqiHistoryByRank(param);
         PageInfo<HistoryAqiChart> pageInfo = new PageInfo<>(historyAqiChartList);
         if(historyAqiChartList.size()>0){
             result.setMsg(true);
@@ -137,4 +135,35 @@ public class CityController {
         }
         return result;
     }
+
+    @UserLoginToken
+    @MyLog(operation = "按空气质量获取空气质量历史排行榜",type = 1)
+    @ApiOperation(value = "按空气质量获取空气质量历史排行榜")
+    @RequestMapping(value = "/getAQHistoryChartByPollution", method = RequestMethod.POST)
+    public ResponseResult getAQHistoryChartByPollution(@RequestBody AqiHistoryParam param) {
+        ResponseResult result = new ResponseResult();
+        result.setMsg(false);
+        //参数校验
+        if(param.getSize()<=0) param.setSize(10);
+        if(param.getQuality()==null||param.getQuality().equals("")) param.setQuality("优质");
+        if(param.getOrder()==null||param.getOrder().equals("")){
+            param.setOrder("asc");
+        }else{
+            String order = param.getOrder().toUpperCase();
+            if(order.equals("ASC")) param.setOrder("ASC");
+            else if(order.equals("DESC")) param.setOrder("DESC");
+            else param.setOrder("ASC");
+        }
+        int pageIndex = param.getPage()<=0?1:param.getPage();
+        PageHelper.startPage(pageIndex, param.getSize());
+        List<HistoryAqiChart> historyAqiChartList = airService.getAqiHistoryByPollution(param);
+        PageInfo<HistoryAqiChart> pageInfo = new PageInfo<>(historyAqiChartList);
+        if(historyAqiChartList.size()>0){
+            result.setMsg(true);
+            result.setData(pageInfo);
+            result.setTotal(pageInfo.getTotal());
+        }
+        return result;
+    }
+
 }

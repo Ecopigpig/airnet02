@@ -25,7 +25,7 @@ public class ApiServiceImpl implements ApiService {
     }
 
     @Override
-    public int auditApi(List<Long> userIdList) {
-        return apiMapper.updateAuthStatus(userIdList);
+    public int auditApi(List<Long> userIdList,Integer auth) {
+        return apiMapper.updateAuthStatus(userIdList,auth);
     }
 }

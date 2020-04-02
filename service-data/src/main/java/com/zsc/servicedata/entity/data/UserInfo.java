@@ -29,7 +29,7 @@ public class UserInfo implements Serializable {
     @ApiModelProperty(value = "角色(0-普通用户;1-管理员)")
     private Integer role;
 
-    @ApiModelProperty(value = "是否允许申请API(0-不允许;1-允许)")
+    @ApiModelProperty(value = "是否允许申请API(0-未申请;1-待审核;2-通过审核;3-申请被拒绝)")
     private Integer auth;
 
     @ApiModelProperty(value = "API-token")

@@ -5,6 +5,7 @@ import com.zsc.servicedata.entity.param.PollutionMonitorParam;
 import com.zsc.servicedata.entity.result.ResponseResult;
 import com.zsc.servicedata.service.PollutionService;
 import com.zsc.servicedata.service.UserService;
+import com.zsc.servicedata.tag.MyLog;
 import com.zsc.servicedata.tag.UserLoginToken;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -30,6 +31,7 @@ public class MonitorController {
     private PollutionService pollutionService;
 
     @UserLoginToken
+    @MyLog(operation = "根据用户ID获取用户的监测情况列表",type = 1)
     @ApiOperation(value = "根据用户ID获取用户的监测情况列表")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "userId", value = "用户ID", required = true, dataType = "Long")
@@ -49,6 +51,7 @@ public class MonitorController {
     }
 
     @UserLoginToken
+    @MyLog(operation = "用户自行添加监测点",type = 2)
     @ApiOperation(value = "用户自行添加监测点")
     @RequestMapping(value = "/setMonitor",method = RequestMethod.POST)
     public ResponseResult setMonitor(@RequestBody List<PollutionMonitorParam> paramList){

@@ -6,6 +6,8 @@ import com.zsc.servicedata.entity.alarm.Message;
 import com.zsc.servicedata.entity.param.MessagePageParam;
 import com.zsc.servicedata.entity.result.ResponseResult;
 import com.zsc.servicedata.service.MessageService;
+import com.zsc.servicedata.tag.MyLog;
+import com.zsc.servicedata.tag.UserLoginToken;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -24,6 +26,8 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
+    @UserLoginToken
+    @MyLog(operation = "获取该用户的站内信列表",type = 1)
     @ApiOperation(value = "获取该用户的站内信列表")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "userId", value = "用户ID", required = true, dataType = "Long"),
@@ -47,6 +51,8 @@ public class MessageController {
         return result;
     }
 
+    @UserLoginToken
+    @MyLog(operation = "通过id获取站内信内容",type = 1)
     @ApiOperation(value = "通过id获取站内信内容")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "messageId", value = "站内信ID", required = true, dataType = "Long")
@@ -64,6 +70,8 @@ public class MessageController {
         return result;
     }
 
+    @UserLoginToken
+    @MyLog(operation = "把站内信改为已读状态",type = 2)
     @ApiOperation(value = "把站内信改为已读状态")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "messageId", value = "站内信ID", required = true, dataType = "Long")
@@ -81,6 +89,8 @@ public class MessageController {
         return result;
     }
 
+    @UserLoginToken
+    @MyLog(operation = "用户批量删除自己的站内信",type = 2)
     @ApiOperation(value = "用户批量删除自己的站内信")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "messageIdList", value = "站内信ID", required = true, dataType = "List")
@@ -97,6 +107,8 @@ public class MessageController {
         return result;
     }
 
+    @UserLoginToken
+    @MyLog(operation = "获取用户站内信的各种状态数量",type = 1)
     @ApiOperation(value = "获取用户站内信的各种状态数量")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "messageId", value = "站内信ID", required = true, dataType = "Long")

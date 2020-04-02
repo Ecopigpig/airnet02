@@ -11,5 +11,6 @@ public interface ApiService {
 
     List<ApplyRecord> getAllApiRecords();
 
-    int auditApi(List<Long> userIdList);
+    int auditApi(List<Long> userIdList,Integer auth);
+
 }
