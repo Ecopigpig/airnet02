@@ -52,4 +52,9 @@ public class MessageServiceImpl implements MessageService {
         map.put("unRead",unRead);
         return map;
     }
+
+    @Override
+    public int getTotal() {
+        return messageMapper.selectTotal();
+    }
 }

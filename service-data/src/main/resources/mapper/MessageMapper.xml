@@ -49,4 +49,8 @@
     <select id="getMessageContext" resultType="com.zsc.servicedata.entity.alarm.Message">
         SELECT * FROM message WHERE id = #{id}
     </select>
+
+    <select id="selectTotal" resultType="int">
+        SELECT COUNT(*) FROM message
+    </select>
 </mapper>

@@ -188,5 +188,21 @@ public class ApiController {
         return result;
     }
 
+    @UserLoginToken
+    @MyLog(operation = "用户查看自己的API申请记录",type = 1)
+    @ApiOperation(value = "用户查看自己的API申请记录")
+    @RequestMapping(value = "/checkApplyRecordByUser",method = RequestMethod.POST)
+    public ResponseResult checkApplyRecordByUser(@RequestBody Map<String,Long> map){
+        ResponseResult result = new ResponseResult();
+        result.setMsg(false);
+        Long userId = map.get("id");
+        List<ApplyRecord> applyRecordList = apiService.getRecordsByUser(userId);
+        if(applyRecordList.size()>0){
+            result.setMsg(true);
+            result.setData(applyRecordList);
+            result.setTotal(Long.valueOf(applyRecordList.size()));
+        }
+        return result;
+    }
 
 }

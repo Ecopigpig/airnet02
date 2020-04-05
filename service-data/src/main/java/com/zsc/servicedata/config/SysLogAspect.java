@@ -70,7 +70,6 @@ public class SysLogAspect {
 
             log.info("operation="+operation+",type="+type);
         }
-
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         String requestURL = request.getRequestURL().toString();
         adminLog.setUrl(requestURL);
@@ -88,11 +87,6 @@ public class SysLogAspect {
             adminLog.setCreateTime(new Date());
         }
         log.info("url="+requestURL,"ip="+ip);
-
-        //调用service保存Operation实体类到数据库
-        //我id使用的是UUID，不需要的可以注释掉
-        String id = String.valueOf(UUID.randomUUID());
-        adminLog.setId(id);
         myLogMapper.insertLog(adminLog);
     }
 

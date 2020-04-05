@@ -4,9 +4,11 @@ package com.zsc.servicehi.config;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;
@@ -16,7 +18,6 @@ import java.nio.charset.Charset;
 
 @Configuration
 public class RedisConfig {
-
     RedisConfig(){
         //打开autotype功能,需要强转的类一次添加其后
         ParserConfig.getGlobalInstance()
@@ -33,7 +34,6 @@ public class RedisConfig {
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory){
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(factory);
-
         StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
         //设置key采用String的序列化方式
         template.setKeySerializer(stringRedisSerializer);

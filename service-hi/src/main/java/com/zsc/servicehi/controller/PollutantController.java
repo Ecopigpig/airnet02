@@ -1,6 +1,9 @@
 package com.zsc.servicehi.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.zsc.servicehi.strategy.IReferenceHandleStrategy;
+import com.zsc.servicehi.strategy.ReferenceHandleStrategyFactory;
+import com.zsc.servicehi.strategy.ReferenceStrategyContext;
 import com.zsc.servicehi.utils.GetPollutantData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -11,6 +14,7 @@ import model.pollutant.MonitorSite;
 import model.pollutant.PollutantCity;
 import model.pollutant.PollutionSite;
 import model.result.ResponseResult;
+import model.weather.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -209,5 +213,23 @@ public class PollutantController {
         }
         result.setData(pageList);
         return result;
+    }
+
+    @ApiOperation(value = "不同程度的污染情况参考值")
+    @RequestMapping(value = "/offerReference", method = RequestMethod.POST)
+    public ResponseResult offerReference(@RequestBody Map<String,String>map) {
+        String quality = map.get("quality");
+        ResponseResult responseResult = new ResponseResult();
+        responseResult.setMsg(false);
+        ReferenceStrategyContext referenceStrategyContext = new ReferenceStrategyContext();
+        IReferenceHandleStrategy referenceHandleStrategy = ReferenceHandleStrategyFactory.getReferenceHandleStrategy(quality);
+        referenceStrategyContext.setReferenceStrategyContext(referenceHandleStrategy);
+        //执行策略
+        Reference reference = referenceStrategyContext.handleReference(quality);
+        if(reference!=null) {
+            responseResult.setMsg(true);
+            responseResult.setData(reference);
+        }
+        return responseResult;
     }
 }

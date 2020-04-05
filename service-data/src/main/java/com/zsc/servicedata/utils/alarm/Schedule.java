@@ -86,7 +86,11 @@ public class Schedule {
                         userIdList.add(pollutant.getUserId());
                         markDownOverData(markMap, city, pollutant, "QUALITY");
                     }
-                    if (Float.valueOf(city.getSo2()) > pollutant.getSo2()) {
+                    if(pollutant.getSo2()==-1){
+                        userIdList.add(pollutant.getUserId());
+                        markDownOverData(markMap, city, pollutant, "SO2");
+                    }
+                    else if(Float.valueOf(city.getSo2()) > pollutant.getSo2()) {
                         //将该用户记录在需要发送邮件的名单中
                         userIdList.add(pollutant.getUserId());
                         markDownOverData(markMap, city, pollutant, "SO2");
@@ -121,7 +125,11 @@ public class Schedule {
                             markDownOverData(markMap, city, pollutant, "PM10");
                         }
                     }
-                    if (Float.valueOf(city.getO3Per8h()) > pollutant.getO3per8h()) {
+                    if(pollutant.getO3per8h()==-2){
+                        userIdList.add(pollutant.getUserId());
+                        markDownOverData(markMap, city, pollutant, "O3PER8H");
+                    }
+                    else if (Float.valueOf(city.getO3Per8h()) > pollutant.getO3per8h()) {
                         userIdList.add(pollutant.getUserId());
                         markDownOverData(markMap, city, pollutant, "O3PER8H");
                     }
@@ -207,7 +215,11 @@ public class Schedule {
             }
             case "SO2": {
                 if (markMap.isEmpty()) {
-                    stringBuilder.append("您所监测的城市：" + pollutant.getArea() + "，当前SO2的1小时平均浓度：" + city.getSo2() + " ug/m3，超过了您所设置的警报阈值：" + pollutant.getSo2() + "\n");
+                    if(pollutant.getSo2()==-1){
+                        stringBuilder.append("您所监测的城市：" + pollutant.getArea() + "，当前SO2的1小时平均浓度：" + city.getSo2() + " ug/m3，严重超过警报阈值！" + "\n");
+                    }else{
+                        stringBuilder.append("您所监测的城市：" + pollutant.getArea() + "，当前SO2的1小时平均浓度：" + city.getSo2() + " ug/m3，超过了您所设置的警报阈值：" + pollutant.getSo2() + "\n");
+                    }
                 } else {
                     //这里要解决一个用户，多个城市问题，应该还有一个城市，多个用户的问题
                     for (Long userId : markMap.keySet()) {
@@ -309,6 +321,9 @@ public class Schedule {
                 break;
             case "O3PER8H":
                 if (markMap.isEmpty()) {
+                    if(pollutant.getO3per8h()==-1){
+                        stringBuilder.append("您所监测的城市：" + pollutant.getArea() + "，当前SO2的1小时平均浓度：" + city.getO3Per8h() + " ug/m3，严重超过警报阈值！" + "\n");
+                    }
                     stringBuilder.append("您所监测的城市：" + pollutant.getArea() + "，当前O3的8小时滑动平均浓度：" + city.getO3Per8h() + " ug/m3，超过了您所设置的警报阈值：" + pollutant.getO3per8h() + "\n");
                 } else {
                     for (Long userId : markMap.keySet()) {

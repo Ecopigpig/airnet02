@@ -20,4 +20,6 @@ public interface MessageMapper {
     int selectCountInCondition(@Param("userId") Long userId,@Param("status") Integer status);
 
     Message getMessageContext(Long messageId);
+
+    int selectTotal();
 }

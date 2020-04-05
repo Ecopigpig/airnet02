@@ -47,4 +47,6 @@ public interface MessageService {
      * @return
      */
     Map<String,Integer> selectCountInCondition(Long userId);
+
+    int getTotal();
 }

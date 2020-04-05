@@ -28,4 +28,9 @@ public class ApiServiceImpl implements ApiService {
     public int auditApi(List<Long> userIdList,Integer auth) {
         return apiMapper.updateAuthStatus(userIdList,auth);
     }
+
+    @Override
+    public List<ApplyRecord> getRecordsByUser(Long userId) {
+        return apiMapper.selectRecordsByUser(userId);
+    }
 }

@@ -63,6 +63,7 @@ public class MessageController {
         result.setMsg(false);
         Long messageId = map.get("messageId");
         Message message = messageService.getMessageContext(messageId);
+        messageService.updateMessageRead(messageId);
         if(message!=null){
             result.setMsg(true);
             result.setData(message);
@@ -110,9 +111,6 @@ public class MessageController {
     @UserLoginToken
     @MyLog(operation = "获取用户站内信的各种状态数量",type = 1)
     @ApiOperation(value = "获取用户站内信的各种状态数量")
-    @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "query", name = "messageId", value = "站内信ID", required = true, dataType = "Long")
-    })
     @RequestMapping(value = "/selectCountInCondition",method = RequestMethod.POST)
     public ResponseResult selectCountInCondition(@RequestBody Map<String,Long> paramMap){
         Long userId = paramMap.get("userId");
@@ -126,4 +124,17 @@ public class MessageController {
         }
         return result;
     }
+
+    @UserLoginToken
+    @MyLog(operation = "获取数据库中站内信总数",type = 1)
+    @ApiOperation(value = "获取数据库中站内信总数")
+    @RequestMapping(value = "/getMessageCount",method = RequestMethod.POST)
+    public ResponseResult getMessageCount(){
+        ResponseResult result = new ResponseResult();
+        result.setMsg(true);
+        int total = messageService.getTotal();
+        result.setData(total);
+        return result;
+    }
+
 }
