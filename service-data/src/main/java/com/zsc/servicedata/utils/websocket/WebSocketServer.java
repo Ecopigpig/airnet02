@@ -6,6 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.WebSocketSession;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
@@ -28,6 +29,7 @@ public class WebSocketServer {
 
     /**
      * 连接建立成功调用的方法*/
+    //连接建立成功即会创建这个会话 session
     @OnOpen
     public void onOpen(Session session,@PathParam("userId") String userId) {
         this.session = session;
@@ -42,9 +44,7 @@ public class WebSocketServer {
             addOnlineCount();
             //在线数加1
         }
-
         log.info("用户连接:"+userId+",当前在线人数为:" + getOnlineCount());
-
         try {
             sendMessage("连接成功");
         } catch (IOException e) {

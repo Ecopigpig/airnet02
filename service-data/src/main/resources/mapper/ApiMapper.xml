@@ -5,12 +5,14 @@
 <mapper namespace="com.zsc.servicedata.mapper.ApiMapper">
 
     <insert id="insertApplyRecord">
-        INSERT INTO applyrecord (userId,reason,applyTime,mail)
+        INSERT INTO applyRecord (userId,reason,applyTime,mail)
         VALUES (#{userId},#{reason},#{applyTime},#{mail})
     </insert>
 
     <select id="selectAllApiRecords" resultType="com.zsc.servicedata.entity.data.ApplyRecord">
-        SELECT * FROM applyrecord ORDER BY applyTime DESC
+        SELECT a.id,a.userId,a.reason,a.applyTime,a.mail,u.auth
+        FROM userInfo as u,applyRecord as a WHERE u.id =  a.userId
+        ORDER BY a.applyTime DESC
     </select>
     
     <update id="updateAuthStatus">
@@ -32,7 +34,11 @@
     
     <select id="selectRecordsByUser" resultMap="RecordMap">
         SELECT a.id,a.userId,a.reason,a.applyTime,a.mail,u.auth
-        FROM userinfo as u,applyrecord as a WHERE u.id =  a.userId AND
+        FROM userInfo as u,applyRecord as a WHERE u.id =  a.userId AND
         u.id =  #{userId} ORDER BY a.applyTime DESC
+    </select>
+
+    <select id="selectWaitAuditNum" resultType="int">
+        SELECT COUNT(*) FROM userInfo WHERE auth = 1
     </select>
 </mapper>

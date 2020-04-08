@@ -14,4 +14,6 @@ public interface ApiService {
     int auditApi(List<Long> userIdList,Integer auth);
 
     List<ApplyRecord> getRecordsByUser(Long userId);
+
+    int getWaitAuditNum();
 }

@@ -36,8 +36,8 @@ public class MessageController {
     })
     @RequestMapping(value = "/getUserMessageList",method = RequestMethod.POST)
     public ResponseResult getUserMessageList(@RequestBody MessagePageParam param){
-        int pageIndex = param.getPage();
-        int pageSize = param.getSize();
+        int pageIndex = param.getPage()<=0?1:param.getPage();
+        int pageSize = param.getSize()<=0?10:param.getSize();
         Long userId = param.getUserId();
         ResponseResult result = new ResponseResult();
         result.setMsg(true);

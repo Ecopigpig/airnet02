@@ -20,6 +20,5 @@
                 type = #{type}
             </if>
         </where>
-
     </select>
 </mapper>

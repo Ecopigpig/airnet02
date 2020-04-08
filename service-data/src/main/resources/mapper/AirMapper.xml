@@ -17,7 +17,7 @@
          > 号 换成&gt; -->
     <!--在if的test中，直接使用参数名，不用加#{}-->
     <select id="selectAqiHistoryByRank" resultMap="AqiHistoryMap" parameterType="com.zsc.servicedata.entity.param.AqiHistoryParam">
-        SELECT * FROM aqihistory a
+        SELECT * FROM aqiHistory a
         <where>
             <if test="startTime != null">
                 AND a.markTime <![CDATA[>=]]> #{startTime}
@@ -45,7 +45,7 @@
 
 
     <select id="selectAqiHistoryByPollution" resultMap="AqiHistoryMap" parameterType="com.zsc.servicedata.entity.param.AqiHistoryParam">
-        SELECT * FROM aqihistory
+        SELECT * FROM aqiHistory
         <where>
             <if test="quality !=null">
                 AND quality = #{quality}

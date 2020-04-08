@@ -13,22 +13,22 @@
     </resultMap>
 
     <insert id="insertAreaCode">
-        insert into areacode (city,area,areaCode,postalCode) values
+        insert into areaCode (city,area,areaCode,postalCode) values
         <foreach collection="list" item="item" index="index" separator="," close=";">
             (#{item.city},#{item.area},#{item.areaCode},#{item.postalCode})
         </foreach>
     </insert>
 
     <insert id="saveSiteOfCity">
-        insert into citysite (area,siteName,longitude,latitude) values
+        insert into citySite (area,siteName,longitude,latitude) values
         <foreach collection="list" item="item" index="index" separator="," close=";">
             (#{item.area},#{item.siteName},#{item.longitude},#{item.latitude})
         </foreach>
     </insert>
 
     <select id="selectCodeByAreaName" resultMap="CityCodeMap">
---         select * from areacode where city like '%${city}%' and area like '%${area}%'
-        select * from areacode where city like "%"#{city}"%" and area like "%"#{area}"%"
+--         select * from areaCode where city like '%${city}%' and area like '%${area}%'
+        select * from areaCode where city like "%"#{city}"%" and area like "%"#{area}"%"
     </select>
 
     <resultMap id="MonitorSiteMap" type="model.pollutant.MonitorSite">
@@ -39,6 +39,6 @@
     </resultMap>
 
     <select id="selectMonitorSiteByCity" resultMap="MonitorSiteMap">
-        SELECT * FROM citysite WHERE area like "%"#{city}"%"
+        SELECT * FROM citySite WHERE area like "%"#{city}"%"
     </select>
 </mapper>

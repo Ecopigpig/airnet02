@@ -5,11 +5,11 @@
 <mapper namespace="com.zsc.servicedata.mapper.PollutionMapper">
 
     <select id="selectMonitorListByUser" parameterType="Long" resultType="com.zsc.servicedata.entity.data.Pollutant">
-        select * from pollutantmonitor where userId = #{userId}
+        select * from pollutantMonitor where userId = #{userId}
     </select>
 
     <insert id="insertMonitorPoint" parameterType="com.zsc.servicedata.entity.param.PollutionMonitorParam">
-        insert into pollutantmonitor (so2,o3,pm25,co,no2,aqi,quality,pm10,o3per8h,area,userId)
+        insert into pollutantMonitor (so2,o3,pm25,co,no2,aqi,quality,pm10,o3per8h,area,userId)
         values
         <foreach collection="list" item="item" index="index" separator="," close=";">
             (#{item.so2},#{item.o3},#{item.pm25},#{item.co},#{item.no2},#{item.aqi},
@@ -18,7 +18,7 @@
     </insert>
 
     <insert id="insertPollutantHistory" parameterType="model.pollutant.PollutionEpisode">
-        insert into pollutanthistory (`rank`,so2,pm25,publishTime,primaryPollutant,
+        insert into pollutantHistory (`rank`,so2,pm25,publishTime,primaryPollutant,
         co,area,no2,aqi,quality,pm10,o3per8h) values
         <foreach collection="list" item="item" separator=",">
             (#{item.rank},#{item.so2},#{item.pm25},#{item.ct},#{item.primaryPollutant},#{item.co},#{item.area},#{item.no2},#{item.aqi},
@@ -27,7 +27,7 @@
     </insert>
 
     <select id="selectAllMonitor" resultType="com.zsc.servicedata.entity.data.Pollutant">
-        select * from pollutantmonitor
+        select * from pollutantMonitor
     </select>
 
     <resultMap id="pollutionEpisodeMap" type="model.pollutant.PollutionEpisode">
@@ -46,7 +46,7 @@
     </resultMap>
 
     <select id="selectAllHistory" resultMap="pollutionEpisodeMap">
-        select * from pollutanthistory
+        select * from pollutantHistory
     </select>
 
     <parameterMap id="historyAqiMap" type="model.air.HistoryAqiChart">
@@ -59,7 +59,7 @@
     </parameterMap>
 
     <insert id="insertAqiHistory" parameterMap="historyAqiMap">
-        insert into aqihistory (`rank`,markTime,area,aqi,quality) values
+        insert into aqiHistory (`rank`,markTime,area,aqi,quality) values
         <foreach collection="list" item="item" separator=",">
             (#{item.rank},#{item.markTime},
             #{item.city},#{item.aqi},#{item.quality})

@@ -33,4 +33,9 @@ public class ApiServiceImpl implements ApiService {
     public List<ApplyRecord> getRecordsByUser(Long userId) {
         return apiMapper.selectRecordsByUser(userId);
     }
+
+    @Override
+    public int getWaitAuditNum() {
+        return apiMapper.selectWaitAuditNum();
+    }
 }

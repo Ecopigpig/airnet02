@@ -205,4 +205,12 @@ public class ApiController {
         return result;
     }
 
+    @RequestMapping("/getWaitAuditNum")
+    public ResponseResult getWaitAuditNum(){
+        ResponseResult result = new ResponseResult();
+        result.setMsg(true);
+        int num = apiService.getWaitAuditNum();
+        result.setData(num);
+        return result;
+    }
 }
