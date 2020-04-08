@@ -222,7 +222,7 @@ public class PollutantController {
         ResponseResult responseResult = new ResponseResult();
         responseResult.setMsg(false);
         ReferenceStrategyContext referenceStrategyContext = new ReferenceStrategyContext();
-        IReferenceHandleStrategy referenceHandleStrategy = ReferenceHandleStrategyFactory.getReferenceHandleStrategy(quality);
+        IReferenceHandleStrategy referenceHandleStrategy = ReferenceHandleStrategyFactory.getReceiptHandleStrategy(quality);
         referenceStrategyContext.setReferenceStrategyContext(referenceHandleStrategy);
         //执行策略
         Reference reference = referenceStrategyContext.handleReference(quality);

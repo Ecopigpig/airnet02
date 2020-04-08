@@ -3,24 +3,24 @@ package com.zsc.servicehi.strategy;
 import com.zsc.servicehi.strategy.Impl.*;
 import org.apache.commons.lang.StringUtils;
 
-public class ReferenceHandleStrategyFactory {
-    private ReferenceHandleStrategyFactory(){}
+import java.util.HashMap;
+import java.util.Map;
 
-    public static IReferenceHandleStrategy getReferenceHandleStrategy(String quality){
-        IReferenceHandleStrategy referenceHandleStrategy = null;
-        if (StringUtils.equals("优质",quality)) {
-            referenceHandleStrategy = new HighReferenceHandleStrategy();
-        } else if (StringUtils.equals("良好",quality)) {
-            referenceHandleStrategy = new FineReferenceHandleStategy();
-        }else if (StringUtils.equals("轻度污染",quality)) {
-            referenceHandleStrategy = new LightReferenceHandleStrategy();
-        }else if (StringUtils.equals("中度污染",quality)) {
-            referenceHandleStrategy = new MiddleReferenceHandleStrategy();
-        }else if (StringUtils.equals("重度污染",quality)) {
-            referenceHandleStrategy = new HeavyReferenceHandleStrategy();
-        }else if (StringUtils.equals("严重污染",quality)) {
-            referenceHandleStrategy = new SeriousReferenceHandleStrategy();
-        }
-        return referenceHandleStrategy;
+public class ReferenceHandleStrategyFactory {
+
+    private static Map<String,IReferenceHandleStrategy> referenceHandleStrategyMap;
+
+    private ReferenceHandleStrategyFactory(){
+        this.referenceHandleStrategyMap = new HashMap<>();
+        this.referenceHandleStrategyMap.put("优质",new HighReferenceHandleStrategy());
+        this.referenceHandleStrategyMap.put("良好",new FineReferenceHandleStategy());
+        this.referenceHandleStrategyMap.put("轻度污染",new LightReferenceHandleStrategy());
+        this.referenceHandleStrategyMap.put("中度污染",new MiddleReferenceHandleStrategy());
+        this.referenceHandleStrategyMap.put("重度污染",new HeavyReferenceHandleStrategy());
+        this.referenceHandleStrategyMap.put("严重污染",new SeriousReferenceHandleStrategy());
+    }
+
+    public static IReferenceHandleStrategy getReceiptHandleStrategy(String quality){
+        return referenceHandleStrategyMap.get(quality);
     }
 }
