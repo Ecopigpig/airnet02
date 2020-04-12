@@ -11,6 +11,7 @@
         <result column="email" property="email" javaType="java.lang.String"/>
         <result column="role" property="role" javaType="java.lang.Integer"/>
         <result column="auth" property="auth" javaType="java.lang.Integer"/>
+        <result column="status" property="status" javaType="java.lang.Byte"/>
     </resultMap>
 
     <update id="updateToken">
@@ -68,4 +69,8 @@
         </foreach>
         )
     </select>
+
+    <update id="changeUserStatus">
+        update userInfo set status = #{status} and id = #{userId}
+    </update>
 </mapper>

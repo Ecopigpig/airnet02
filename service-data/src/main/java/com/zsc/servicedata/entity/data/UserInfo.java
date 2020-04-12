@@ -35,4 +35,6 @@ public class UserInfo implements Serializable {
     @ApiModelProperty(value = "API-token")
     private String token;
 
+    @ApiModelProperty(value = "用户账号状态(0-启用;1-禁用)")
+    private Byte status;
 }

@@ -64,4 +64,9 @@ public class UserServiceImpl implements UserService {
     public Map<Long, UserInfo> getUserByIdList(List<Long> userIdList) {
         return userMapper.selectUserMapByIdList(userIdList);
     }
+
+    @Override
+    public void changeUserStatus(Byte status,Long userId) {
+        userMapper.changeUserStatus(status,userId);
+    }
 }

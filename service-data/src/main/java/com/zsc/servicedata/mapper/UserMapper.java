@@ -33,4 +33,6 @@ public interface UserMapper {
 
     @MapKey("id")
     Map<Long, UserInfo> selectUserMapByIdList(@Param("list") List<Long> userIdList);
+
+    void changeUserStatus(@Param("status") Byte i, @Param("userId") Long userId);
 }

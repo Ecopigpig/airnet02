@@ -58,4 +58,6 @@ public interface UserService {
     int updateUserInfo(UserInfo userInfo);
 
     Map<Long, UserInfo> getUserByIdList(List<Long> userIdList);
+
+    void changeUserStatus(Byte status,Long userId);
 }

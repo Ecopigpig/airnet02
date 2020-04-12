@@ -12,10 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import model.page.PageParam;
 import model.result.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -115,6 +112,29 @@ public class UserController {
                 return result;
             }
         }
+        return result;
+    }
+//    @UserLoginToken
+//    @MyLog(operation = "禁用用户账号",type = 2)
+//    @ApiOperation(value = "禁用用户账号")
+    @RequestMapping(value = "/disableUserStatus",method = RequestMethod.POST)
+    public ResponseResult disableUserStatus(@RequestParam("userId")Long userId){
+        ResponseResult result = new ResponseResult();
+        Byte disable = 1;
+        userService.changeUserStatus(disable,userId);
+        result.setMsg(true);
+        return result;
+    }
+
+    //    @UserLoginToken
+//    @MyLog(operation = "启用用户账号",type = 2)
+//    @ApiOperation(value = "启用用户账号")
+    @RequestMapping(value = "/enableUserStatus",method = RequestMethod.POST)
+    public ResponseResult enableUserStatus(@RequestParam("userId")Long userId){
+        ResponseResult result = new ResponseResult();
+        Byte enabled = 0;
+        userService.changeUserStatus(enabled,userId);
+        result.setMsg(true);
         return result;
     }
 
