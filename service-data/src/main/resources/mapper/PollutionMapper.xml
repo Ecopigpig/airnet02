@@ -8,7 +8,7 @@
         select * from pollutantMonitor where userId = #{userId}
     </select>
 
-    <insert id="insertMonitorPoint" parameterType="com.zsc.servicedata.entity.param.PollutionMonitorParam">
+    <insert id="insertMonitorPoint" parameterType="model.pollutant.PollutionMonitorResult">
         insert into pollutantMonitor (so2,o3,pm25,co,no2,aqi,quality,pm10,o3per8h,area,userId)
         values
         <foreach collection="list" item="item" index="index" separator="," close=";">
@@ -65,4 +65,13 @@
             #{item.city},#{item.aqi},#{item.quality})
         </foreach>
     </insert>
+
+    <update id="editMonitor" parameterType="model.pollutant.PollutionMonitorResult">
+        update pollutantMonitor set area = #{area},so2=#{so2},o3=#{o3},pm25=#{pm25},co=#{co},no2=#{no2},
+        aqi=#{aqi},quality=#{quality},pm10=#{pm10},o3per8h=#{o3per8h} where id = #{id}
+    </update>
+
+    <delete id="deleteMonitor">
+        delete from pollutantMonitor where id = #{id}
+    </delete>
 </mapper>

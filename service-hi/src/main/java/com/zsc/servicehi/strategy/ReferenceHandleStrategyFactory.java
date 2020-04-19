@@ -1,7 +1,6 @@
 package com.zsc.servicehi.strategy;
 
 import com.zsc.servicehi.strategy.Impl.*;
-import org.apache.commons.lang.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +12,7 @@ public class ReferenceHandleStrategyFactory {
     private ReferenceHandleStrategyFactory(){
         this.referenceHandleStrategyMap = new HashMap<>();
         this.referenceHandleStrategyMap.put("优质",new HighReferenceHandleStrategy());
-        this.referenceHandleStrategyMap.put("良好",new FineReferenceHandleStategy());
+        this.referenceHandleStrategyMap.put("良好",new FineReferenceHandleStrategy());
         this.referenceHandleStrategyMap.put("轻度污染",new LightReferenceHandleStrategy());
         this.referenceHandleStrategyMap.put("中度污染",new MiddleReferenceHandleStrategy());
         this.referenceHandleStrategyMap.put("重度污染",new HeavyReferenceHandleStrategy());

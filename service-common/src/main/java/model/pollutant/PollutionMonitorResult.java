@@ -1,27 +1,23 @@
-package com.zsc.servicedata.entity.param;
+package model.pollutant;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-@ApiModel(value = "用户添加城市污染物检测指标参数")
 @Data
-public class PollutionMonitorParam implements Serializable {
+@ApiModel(value = "用户添加城市污染物检测指标参数")
+public class PollutionMonitorResult implements Serializable {
 
-    private static final long serialVersionUID = -132525208124470458L;
+    private static final long serialVersionUID = 7709966672579278660L;
 
     @ApiModelProperty(value = "id")
     private Long id;
 
-    @NotNull(message = "用户ID不能为空")
     @ApiModelProperty(value = "用户ID")
     private Long userId;
 
-    @NotEmpty(message = "城市名称不能为空")
     @ApiModelProperty(value = "要检测的城市名称")
     private String area;
 
@@ -43,9 +39,8 @@ public class PollutionMonitorParam implements Serializable {
     @ApiModelProperty(value = "AQI浓度阈值")
     private Float aqi;
 
-    @NotEmpty
     @ApiModelProperty(value = "空气质量阈值,有“优、良、轻度污染、中度污染、重度污染、严重污染”6类")
-    private int quality;
+    private String quality;
 
     @ApiModelProperty(value = "PM10阈值")
     private Float pm10;

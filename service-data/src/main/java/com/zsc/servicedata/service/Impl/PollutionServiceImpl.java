@@ -9,6 +9,7 @@ import com.zsc.servicedata.service.feign.HiFeignService;
 import model.air.HistoryAqiChart;
 import model.pollutant.MonitorSite;
 import model.pollutant.PollutionEpisode;
+import model.pollutant.PollutionMonitorResult;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -41,7 +42,7 @@ public class PollutionServiceImpl implements PollutionService {
     }
 
     @Override
-    public void setMonitor(List<PollutionMonitorParam> paramList)throws Exception{
+    public void setMonitor(List<PollutionMonitorResult> paramList)throws Exception{
             paramList.forEach(param -> {
                 if(param.getArea().equals("")||param.getArea()==null){
                     try {
@@ -88,5 +89,15 @@ public class PollutionServiceImpl implements PollutionService {
     @Override
     public void markAqiHistory(List<HistoryAqiChart> historyAqiChartList) {
         pollutionMapper.insertAqiHistory(historyAqiChartList);
+    }
+
+    @Override
+    public int editMonitor(PollutionMonitorResult monitorResult) {
+        return pollutionMapper.editMonitor(monitorResult);
+    }
+
+    @Override
+    public void deleteMonitor(Long id) {
+        pollutionMapper.deleteMonitor(id);
     }
 }

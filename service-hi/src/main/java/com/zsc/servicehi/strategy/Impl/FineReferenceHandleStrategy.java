@@ -4,7 +4,7 @@ import com.zsc.servicehi.strategy.IReferenceHandleStrategy;
 import model.pollutant.PollutionEpisode;
 import model.weather.Reference;
 
-public class FineReferenceHandleStategy implements IReferenceHandleStrategy {
+public class FineReferenceHandleStrategy implements IReferenceHandleStrategy {
     @Override
     public Reference handleReference(String quality) {
         Reference reference = new Reference();

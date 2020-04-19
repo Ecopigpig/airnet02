@@ -5,6 +5,7 @@ import com.zsc.servicedata.entity.param.PollutionMonitorParam;
 import model.air.HistoryAqiChart;
 import model.pollutant.MonitorSite;
 import model.pollutant.PollutionEpisode;
+import model.pollutant.PollutionMonitorResult;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public interface PollutionService {
      * @param paramList
      * @return
      */
-    void setMonitor(List<PollutionMonitorParam> paramList)throws Exception;
+    void setMonitor(List<PollutionMonitorResult> paramList)throws Exception;
 
     /**
      * 通过城市名返回该城市下的污染检测点
@@ -56,4 +57,8 @@ public interface PollutionService {
      * @param historyAqiChartList
      */
     void markAqiHistory(List<HistoryAqiChart> historyAqiChartList);
+
+    int editMonitor(PollutionMonitorResult monitorResult);
+
+    void deleteMonitor(Long id);
 }

@@ -4,6 +4,7 @@ import com.zsc.servicedata.entity.data.Pollutant;
 import com.zsc.servicedata.entity.param.PollutionMonitorParam;
 import model.air.HistoryAqiChart;
 import model.pollutant.PollutionEpisode;
+import model.pollutant.PollutionMonitorResult;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +25,7 @@ public interface PollutionMapper {
 //    @Select("select * from pollutant where userId = #{userId}")
     List<Pollutant> selectMonitorListByUser(Long userId);
 
-    void insertMonitorPoint(@Param("list") List<PollutionMonitorParam> paramList);
+    void insertMonitorPoint(@Param("list") List<PollutionMonitorResult> paramList);
 
     List<Pollutant> selectAllMonitor();
 
@@ -33,4 +34,8 @@ public interface PollutionMapper {
     List<PollutionEpisode> selectAllHistory();
 
     void insertAqiHistory(List<HistoryAqiChart> historyAqiChartList);
+
+    int editMonitor(PollutionMonitorResult monitorResult);
+
+    void deleteMonitor(@Param("id")Long id);
 }
