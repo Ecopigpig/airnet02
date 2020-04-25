@@ -1,13 +1,12 @@
 package com.zsc.servicedata.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.zsc.servicedata.entity.alarm.Message;
 import com.zsc.servicedata.entity.data.UserInfo;
 import com.zsc.servicedata.mapper.MyLogMapper;
+import com.zsc.servicedata.service.MessageService;
 import com.zsc.servicedata.service.TokenService;
 import com.zsc.servicedata.service.UserService;
-import com.zsc.servicedata.tag.MyLog;
-import com.zsc.servicedata.tag.UserLoginToken;
-import com.zsc.servicedata.utils.token.TokenUtil;
 import com.zsc.servicedata.utils.websocket.WebSocketServer;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Date;
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 
@@ -32,6 +30,9 @@ public class LoginController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    MessageService messageService;
 
     @Autowired
     TokenService tokenService;
@@ -57,31 +58,37 @@ public class LoginController {
             result.setData(jsonObject);
             return result;
         } else {
-            if (!userForBase.getPassword().equals(user.getPassword())) {
-                jsonObject.put("message", "登录失败,密码错误");
-                result.setData(jsonObject);
+             Byte disabled = 1;
+            if(userForBase.getStatus().equals(disabled)){
+                result.setData("该账号被禁用,无法登录,请联系管理员");
                 return result;
-            } else {
-                String token = (String) redisTemplate.opsForValue().get(userForBase.getId() + "token");
-                if (token == null) {
-                    token = tokenService.getToken(userForBase);
-                    redisTemplate.opsForValue().set(userForBase.getId() + "token", token);
-                    stringRedisTemplate.expire(userForBase.getId() + "token", 30, TimeUnit.MINUTES);
+            }else{
+                if (!userForBase.getPassword().equals(user.getPassword())) {
+                    jsonObject.put("message", "登录失败,密码错误");
+                    result.setData(jsonObject);
+                    return result;
+                } else {
+                    String token = (String) redisTemplate.opsForValue().get(userForBase.getId() + "token");
+                    if (token == null) {
+                        token = tokenService.getToken(userForBase);
+                        redisTemplate.opsForValue().set(userForBase.getId() + "token", token);
+                        stringRedisTemplate.expire(userForBase.getId() + "token", 30, TimeUnit.MINUTES);
+                    }
+                    jsonObject.put("token", token);
+                    jsonObject.put("user",userForBase);
+                    Operation adminLog = new Operation();
+                    adminLog.setUserId(userForBase.getId());
+                    adminLog.setUserName(userForBase.getUsername());
+                    adminLog.setLoginIp(request.getRemoteAddr());
+                    adminLog.setType(0);
+                    adminLog.setUrl(request.getRequestURL().toString());
+                    adminLog.setOperation("用户登录");
+                    adminLog.setCreateTime(new Date());
+                    myLogMapper.insertLog(adminLog);
+                    result.setMsg(true);
+                    result.setData(jsonObject);
+                    return result;
                 }
-                jsonObject.put("token", token);
-                jsonObject.put("user",userForBase);
-                Operation adminLog = new Operation();
-                adminLog.setUserId(userForBase.getId());
-                adminLog.setUserName(userForBase.getUsername());
-                adminLog.setLoginIp(request.getRemoteAddr());
-                adminLog.setType(0);
-                adminLog.setUrl(request.getRequestURL().toString());
-                adminLog.setOperation("用户登录");
-                adminLog.setCreateTime(new Date());
-                myLogMapper.insertLog(adminLog);
-                result.setMsg(true);
-                result.setData(jsonObject);
-                return result;
             }
         }
     }
@@ -115,7 +122,16 @@ public class LoginController {
     @RequestMapping(value = "/sendWebSocket",method = RequestMethod.POST)
     public String getMessage(@RequestParam("userId")String userId) throws IOException {
         // 取出token中带的用户id 进行操作
-        WebSocketServer.sendAlarmMessageInSide("websocket后端给前端发消息",userId);
+        Message message = new Message();
+        message.setUserId(6L);
+        Byte unRead = 0;
+        message.setIsRead(unRead);
+        message.setContext("webSocket测试"+new Date());
+        message.setSendTime(new Date());
+        int i = messageService.insertNewMessage(message);
+        if(i>0){
+            WebSocketServer.sendAlarmMessageInSide("websocket后端给前端发消息",userId);
+        }
         return "websocket信息已发送";
     }
 }

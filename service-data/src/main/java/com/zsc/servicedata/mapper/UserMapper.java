@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -35,4 +36,6 @@ public interface UserMapper {
     Map<Long, UserInfo> selectUserMapByIdList(@Param("list") List<Long> userIdList);
 
     void changeUserStatus(@Param("status") Byte i, @Param("userId") Long userId);
+
+    int insertTest(@Param("markTime") Date date);
 }

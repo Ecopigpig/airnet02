@@ -10,7 +10,7 @@ import java.util.List;
 public interface ApiMapper {
     int insertApplyRecord(ApplyRecord applyRecord);
 
-    List<ApplyRecord> selectAllApiRecords();
+    List<ApplyRecord> selectAllApiRecords(@Param("auth")Integer auth);
 
     int updateAuthStatus(@Param("list") List<Long> userIdList,@Param("auth")Integer auth);
 

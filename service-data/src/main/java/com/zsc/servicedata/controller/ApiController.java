@@ -2,15 +2,19 @@ package com.zsc.servicedata.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.zsc.servicedata.entity.alarm.Message;
 import com.zsc.servicedata.entity.data.ApplyRecord;
 import com.zsc.servicedata.entity.data.TokenResult;
 import com.zsc.servicedata.entity.data.UserInfo;
+import com.zsc.servicedata.entity.param.ApiParam;
 import com.zsc.servicedata.service.ApiService;
+import com.zsc.servicedata.service.MessageService;
 import com.zsc.servicedata.service.TokenService;
 import com.zsc.servicedata.service.UserService;
 import com.zsc.servicedata.tag.MyLog;
 import com.zsc.servicedata.tag.UserLoginToken;
 import com.zsc.servicedata.utils.token.TokenUtil;
+import com.zsc.servicedata.utils.websocket.WebSocketServer;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import model.page.PageParam;
@@ -18,6 +22,7 @@ import model.result.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,6 +41,9 @@ public class ApiController {
 
     @Autowired
     TokenService tokenService;
+
+    @Autowired
+    MessageService messageService;
 
     @UserLoginToken
     @MyLog(operation = "用户获取其申请的API",type = 1)
@@ -126,11 +134,11 @@ public class ApiController {
     @MyLog(operation = "后台查看用户API申请列表",type = 1)
     @ApiOperation(value = "后台查看用户API申请列表")
     @RequestMapping(value = "/apiList", method = RequestMethod.POST)
-    public ResponseResult apiList(@RequestBody PageParam pageParam) {
+    public ResponseResult apiList(@RequestBody ApiParam apiParam) {
         ResponseResult result = new ResponseResult();
         result.setMsg(false);
-        PageHelper.startPage(pageParam.getPage(),pageParam.getSize());
-        List<ApplyRecord> list = apiService.getAllApiRecords();
+        PageHelper.startPage(apiParam.getPage(),apiParam.getSize());
+        List<ApplyRecord> list = apiService.getAllApiRecords(apiParam.getAuth());
         if(list.size()>0){
             result.setMsg(true);
             PageInfo<ApplyRecord> pageInfo = new PageInfo<>(list);
@@ -158,7 +166,22 @@ public class ApiController {
                 String token = tokenService.getAPIToken(userInfo);
                 //把它存到用户API数据表中
                 userService.insertToken(id,token);
+                Message message = new Message();
+                message.setSendTime(new Date());
+                String context = "您的API申请已获审批,您的API-KEY为："+"\n"+token;
+                message.setContext(context);
+                message.setIsRead((byte)0);
+                message.setUserId(userInfo.getId());
+                int j = messageService.insertNewMessage(message);
+                if(j>0) {
+                    try {
+                        WebSocketServer.sendAlarmMessageInSide(context, String.valueOf(userInfo.getId()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             });
+
             result.setData("全部审核通过！");
         }
         return result;
@@ -174,16 +197,9 @@ public class ApiController {
         List<Long> userIdList = map.get("list");
         //更改用户申请的状态
         int i = apiService.auditApi(userIdList,3);
-        Map<Long,UserInfo> userInfoMap = userService.getUserByIdList(userIdList);
         if(i>0){
-            //生成用户唯一的token
             result.setMsg(true);
-            userInfoMap.forEach((id,userInfo)->{
-                String token = tokenService.getAPIToken(userInfo);
-                //把它存到用户API数据表中
-                userService.insertToken(id,token);
-            });
-            result.setData("全部审核通过！");
+            result.setData("完成全部驳回！");
         }
         return result;
     }

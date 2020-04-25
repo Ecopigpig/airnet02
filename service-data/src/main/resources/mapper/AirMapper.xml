@@ -64,7 +64,6 @@
                 ORDER BY
                 markTime,`rank` DESC
             </if>
-
         </where>
     </select>
 

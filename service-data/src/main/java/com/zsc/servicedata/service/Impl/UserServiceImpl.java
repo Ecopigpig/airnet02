@@ -6,10 +6,7 @@ import com.zsc.servicedata.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Service("UserService")
 public class UserServiceImpl implements UserService {
@@ -68,5 +65,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void changeUserStatus(Byte status,Long userId) {
         userMapper.changeUserStatus(status,userId);
+    }
+
+    @Override
+    public int insertTest(Date date) {
+        return userMapper.insertTest(date);
     }
 }

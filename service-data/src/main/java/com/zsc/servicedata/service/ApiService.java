@@ -9,7 +9,7 @@ import java.util.List;
 public interface ApiService {
     int addNewApplyRecord(ApplyRecord applyRecord);
 
-    List<ApplyRecord> getAllApiRecords();
+    List<ApplyRecord> getAllApiRecords(Integer auth);
 
     int auditApi(List<Long> userIdList,Integer auth);
 

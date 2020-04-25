@@ -20,8 +20,8 @@ public class ApiServiceImpl implements ApiService {
     }
 
     @Override
-    public List<ApplyRecord> getAllApiRecords() {
-        return apiMapper.selectAllApiRecords();
+    public List<ApplyRecord> getAllApiRecords(Integer auth) {
+        return apiMapper.selectAllApiRecords(auth);
     }
 
     @Override

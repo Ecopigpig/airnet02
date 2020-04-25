@@ -3,6 +3,7 @@ package com.zsc.servicedata.service;
 import com.zsc.servicedata.entity.data.UserInfo;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -60,4 +61,6 @@ public interface UserService {
     Map<Long, UserInfo> getUserByIdList(List<Long> userIdList);
 
     void changeUserStatus(Byte status,Long userId);
+
+    int insertTest(Date date);
 }

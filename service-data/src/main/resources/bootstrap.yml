@@ -49,8 +49,10 @@ spring:
 #    username: ecochoupipig@163.com
 #    password: mnc2017317725 #这是邮箱授权码，不是密码
     host: smtp.qq.com
-    username: 1315943577@qq.com
-    password: radsmkjnthpyhafi #这是邮箱授权码，不是密码
+#    username: 1315943577@qq.com
+#    password: radsmkjnthpyhafi #这是邮箱授权码，不是密码
+    username: 2356526925@qq.com
+    password: socgssmdeoaddjee #这是邮箱授权码，不是密码
     default-encoding: utf-8
     protocol: smtp
     properties:

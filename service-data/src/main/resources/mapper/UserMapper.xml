@@ -73,4 +73,8 @@
     <update id="changeUserStatus">
         update userInfo set status = #{status} and id = #{userId}
     </update>
+
+    <insert id="insertTest">
+        insert test (markTime) values (#{markTime})
+    </insert>
 </mapper>
