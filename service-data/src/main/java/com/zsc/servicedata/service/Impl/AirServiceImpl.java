@@ -24,4 +24,9 @@ public class AirServiceImpl implements AirService {
     public List<HistoryAqiChart> getAqiHistoryByPollution(AqiHistoryParam param) {
         return airMapper.selectAqiHistoryByPollution(param);
     }
+
+    @Override
+    public List<HistoryAqiChart> exportAqiHistoryByPollution(AqiHistoryParam param) {
+        return airMapper.exportAqiHistoryByPollution(param);
+    }
 }

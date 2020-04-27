@@ -10,22 +10,10 @@
     </insert>
 
     <select id="selectAllApiRecords" resultType="com.zsc.servicedata.entity.data.ApplyRecord" parameterType="Integer">
-        <!--SELECT a.id,a.userId,a.reason,a.applyTime,a.mail,u.auth-->
-        <!--FROM userInfo as u,applyRecord as a-->
-        <!--<where>-->
-            <!--u.id =  a.userId-->
-            <!--<if test="auth == null">-->
-                <!--and u.auth in (1,2,3)-->
-            <!--</if>-->
-            <!--<if test="auth != null">-->
-                <!--and u.auth = #{auth}-->
-            <!--</if>-->
-        <!--</where>-->
-        <!--ORDER BY a.applyTime DESC-->
 select a.id,a.userId,a.reason,a.applyTime,a.mail,u.auth
 FROM
-userinfo AS u
-Left Join applyrecord AS a ON u.id = a.userId
+userInfo AS u
+Left Join applyRecord AS a ON u.id = a.userId
 <where>
     <if test="auth == null">
         u.auth in (1,2,3)

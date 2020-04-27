@@ -131,6 +131,16 @@ public class ExportController {
     @RequestMapping(value = "/airHistory",method = RequestMethod.POST)
     public void exportAirHistory(HttpServletResponse response, @RequestBody AqiHistoryParam param) throws IOException, ParseException {
         //参数校验
+//        if(param.getRecordSize()==null||param.getRecordSize()<=0) param.setRecordSize(10L);
+//        if(param.getOrder()==null||param.getOrder().equals("")){
+//            param.setOrder("asc");
+//        }else{
+//            String order = param.getOrder().toUpperCase();
+//            if(order.equals("ASC")) param.setOrder("ASC");
+//            else if(order.equals("DESC")) param.setOrder("DESC");
+//            else param.setOrder("ASC");
+//        }
+//        List<HistoryAqiChart> historyAqiChartList = airService.getAqiHistoryByPollution(param);
         if(param.getRecordSize()==null||param.getRecordSize()<=0) param.setRecordSize(10L);
         if(param.getOrder()==null||param.getOrder().equals("")){
             param.setOrder("asc");
@@ -140,7 +150,7 @@ public class ExportController {
             else if(order.equals("DESC")) param.setOrder("DESC");
             else param.setOrder("ASC");
         }
-        List<HistoryAqiChart> historyAqiChartList = airService.getAqiHistoryByRank(param);
+        List<HistoryAqiChart> historyAqiChartList = airService.exportAqiHistoryByPollution(param);
 
         HSSFWorkbook wb = new HSSFWorkbook();
 

@@ -15,4 +15,6 @@ public interface AirService {
     List<HistoryAqiChart> getAqiHistoryByRank(AqiHistoryParam param);
 
     List<HistoryAqiChart> getAqiHistoryByPollution(AqiHistoryParam param);
+
+    List<HistoryAqiChart> exportAqiHistoryByPollution(AqiHistoryParam param);
 }

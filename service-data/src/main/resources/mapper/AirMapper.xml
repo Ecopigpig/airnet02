@@ -28,7 +28,7 @@
             <if test="size !=null">
                 AND #{recordSize} &gt;
                 (
-                SELECT COUNT(*) FROM aqihistory WHERE
+                SELECT COUNT(*) FROM aqiHistory WHERE
                 markTime=a.markTime AND `rank` &lt; a.`rank`
                 )
                 <if test="order=='ASC'.toString()">
@@ -68,7 +68,22 @@
     </select>
 
 
-
+    <select id="exportAqiHistoryByPollution" resultMap="AqiHistoryMap" parameterType="com.zsc.servicedata.entity.param.AqiHistoryParam">
+        SELECT * FROM aqiHistory
+        <where>
+            <if test="quality !=null">
+                AND quality = #{quality}
+            </if>
+            <if test="startTime != null">
+                AND markTime <![CDATA[>=]]> #{startTime}
+            </if>
+            <if test="endTime != null">
+                AND markTime <![CDATA[<=]]>#{endTime}
+            </if>
+        </where>
+        ORDER BY
+        markTime DESC,`rank` ASC
+    </select>
 
 
 </mapper>

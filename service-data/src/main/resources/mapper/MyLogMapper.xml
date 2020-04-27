@@ -10,7 +10,7 @@
     </insert>
 
     <select id="selectAll" resultType="model.log.Operation">
-        SELECT * FROM operation
+        SELECT * FROM operation order by createTime desc
     </select>
 
     <select id="selectNumByCondition" parameterType="int" resultType="int">

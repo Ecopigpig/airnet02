@@ -12,4 +12,6 @@ public interface AirMapper {
     List<HistoryAqiChart> selectAqiHistoryByRank(AqiHistoryParam param);
 
     List<HistoryAqiChart> selectAqiHistoryByPollution(AqiHistoryParam param);
+
+    List<HistoryAqiChart> exportAqiHistoryByPollution(AqiHistoryParam param);
 }

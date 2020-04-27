@@ -118,10 +118,11 @@ public class ApiController {
         if(userForBase.getAuth().equals(1)){
             result.setMsg(true);
             result.setData("您已提交申请,请耐心等待审核");
-        }else{
+        }
+        if(userForBase.getAuth().equals(2)){
             List<Long> userIdList = new ArrayList<>();
             userIdList.add(Long.valueOf(userId));
-            apiService.auditApi(userIdList,1);
+            apiService.auditApi(userIdList,2);
             if(i>0){
                 result.setMsg(true);
                 result.setData("申请成功");
