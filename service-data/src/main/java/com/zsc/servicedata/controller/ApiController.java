@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -115,17 +116,36 @@ public class ApiController {
         int i = apiService.addNewApplyRecord(applyRecord);
         String userId = TokenUtil.getTokenUserId();
         UserInfo userForBase = userService.getUserById(Long.valueOf(userId));
-        if(userForBase.getAuth().equals(1)){
+        //未申请
+        if(userForBase.getAuth().equals(0)){
+            List<Long> userIdList = new ArrayList<>();
+            userIdList.add(Long.valueOf(userId));
+            apiService.auditApi(userIdList,1);
             result.setMsg(true);
             result.setData("您已提交申请,请耐心等待审核");
         }
-        if(userForBase.getAuth().equals(2)){
+        //待审核
+        else if(userForBase.getAuth().equals(1)){
+            result.setMsg(true);
+            result.setData("您已提交申请,请耐心等待审核");
+        }
+        //审核通过
+        else if(userForBase.getAuth().equals(2)){
             List<Long> userIdList = new ArrayList<>();
             userIdList.add(Long.valueOf(userId));
             apiService.auditApi(userIdList,2);
             if(i>0){
                 result.setMsg(true);
                 result.setData("申请成功");
+            }
+        }
+        else if(userForBase.getAuth().equals(3)){
+            List<Long> userIdList = new ArrayList<>();
+            userIdList.add(Long.valueOf(userId));
+            apiService.auditApi(userIdList,1);
+            if(i>0){
+                result.setMsg(true);
+                result.setData("您之前的申请被拒绝,当前新的申请已提交成功.");
             }
         }
         return result;

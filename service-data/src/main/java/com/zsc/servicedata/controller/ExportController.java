@@ -1,6 +1,7 @@
 package com.zsc.servicedata.controller;
 
 import com.zsc.servicedata.entity.param.AqiHistoryParam;
+import com.zsc.servicedata.entity.result.ResponseResult;
 import com.zsc.servicedata.service.AirService;
 import com.zsc.servicedata.service.PollutionService;
 import com.zsc.servicedata.tag.MyLog;
@@ -128,8 +129,8 @@ public class ExportController {
     @UserLoginToken
     @MyLog(operation = "按条件导出空气质量历史排行榜",type = 1)
     @ApiOperation(value = "按条件导出空气质量历史排行榜")
-    @RequestMapping(value = "/airHistory",method = RequestMethod.POST)
-    public void exportAirHistory(HttpServletResponse response, @RequestBody AqiHistoryParam param) throws IOException, ParseException {
+    @RequestMapping(value = "/airHistoryOld",method = RequestMethod.POST)
+    public void exportAirHistoryOld(HttpServletResponse response, @RequestBody AqiHistoryParam param) throws IOException, ParseException {
         //参数校验
 //        if(param.getRecordSize()==null||param.getRecordSize()<=0) param.setRecordSize(10L);
 //        if(param.getOrder()==null||param.getOrder().equals("")){
@@ -218,5 +219,21 @@ public class ExportController {
         wb.write(os);
         os.flush();
         os.close();
+    }
+
+    @UserLoginToken
+    @MyLog(operation = "按条件导出空气质量历史排行榜",type = 1)
+    @ApiOperation(value = "按条件导出空气质量历史排行榜")
+    @RequestMapping(value = "/airHistory",method = RequestMethod.POST)
+    public ResponseResult exportAirHistory(@RequestBody AqiHistoryParam param){
+        //参数校验
+        ResponseResult result = new ResponseResult();
+        result.setMsg(false);
+        List<HistoryAqiChart> historyAqiChartList = airService.exportAqiHistoryByPollution(param);
+        if(historyAqiChartList.size()>0){
+            result.setMsg(true);
+            result.setData(historyAqiChartList);
+        }
+        return result;
     }
 }
