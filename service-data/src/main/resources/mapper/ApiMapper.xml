@@ -10,7 +10,7 @@
     </insert>
 
     <select id="selectAllApiRecords" resultType="com.zsc.servicedata.entity.data.ApplyRecord" parameterType="Integer">
-select a.id,a.userId,a.reason,a.applyTime,a.mail,u.auth
+select a.id,a.userId,a.reason,a.applyTime,a.mail,u.auth,u.username
 FROM
 userInfo AS u
 Left Join applyRecord AS a ON u.id = a.userId
